@@ -1,6 +1,13 @@
 <template>
   <q-page class="flex flex-center">
-    <h1>Test</h1>
+    <div class="row">
+      <div class="col-6">
+
+      </div>
+      <div class="col-6">
+        <numpad></numpad>
+      </div>
+    </div>
   </q-page>
 </template>
 <style>
