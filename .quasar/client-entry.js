@@ -32,8 +32,7 @@ import createApp from './app.js'
 
 
 import b_Bootaxios from 'boot/axios'
-
-
+import v_Mixins from 'boot/mixins'
 
 
 
@@ -55,8 +54,8 @@ const { app, store, router } = createApp()
 
 
 async function start () {
-  
-  const bootFiles = [b_Bootaxios]
+
+  const bootFiles = [b_Bootaxios, v_Mixins]
   for (let i = 0; i < bootFiles.length; i++) {
     try {
       await bootFiles[i]({
@@ -77,19 +76,19 @@ async function start () {
       return
     }
   }
-  
 
-  
 
-    
 
-    
+
+
+
+
 
       new Vue(app)
 
-    
 
-  
+
+
 
 }
 
