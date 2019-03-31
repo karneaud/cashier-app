@@ -4,8 +4,8 @@
       <q-toolbar>
         <q-toolbar-title>
          	Cashier Application
-          <div slot="subtitle">v0.1</div>
         </q-toolbar-title>
+        <div>v{{ version }}</div>
       </q-toolbar>
     </q-header>
     <q-page-container>
