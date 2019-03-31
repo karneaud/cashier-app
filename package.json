@@ -7,7 +7,7 @@
   "author": "Kendall Arneaud",
   "private": true,
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "test": "quasar test --unit jest --dev='-m spa'"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
