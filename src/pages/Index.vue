@@ -23,16 +23,44 @@ export default {
   name: 'PageIndex',
   data() {
     return {
-      items: []
+      items: [],
     }
   },
-
+  computed: {
+    currentItem() {
+      return this.items == null? null : this.items[this.items.length - 1]
+    }
+  },
   methods: {
-    keypadPressed(val) {
-      console.log('key pressed', val);
+    keypadPressed(...val) {
+      let operator, amt = val
+      switch (operator) {
+        case "%":
+          this.discount(amt)
+          break;
+        default:
+          this.multiply(amt)
+          break;
+      }
     },
     itemSelected(item) {
-      console.log('item selected is', item )
+      this.items.$set(this.items.length, item)
+    },
+    discount(val){
+      this.currentItem.multiplier = 0 - (val/ 100) * parseFloat(this.currentItem.cost)
+    },
+    multiply(val) {
+      this.currentItem.qty = val;
+    },
+    cash(val) {
+      switch(this.operator) {
+        case "%":
+          this.discount(val)
+          break;
+        default:
+          this.multiply(val)
+          break;
+      }
     }
   }
 }
