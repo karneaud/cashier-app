@@ -48,7 +48,6 @@ export default {
       this.$set( this.items, this.items.length, item)
     },
     discount(val){
-      parseFloat(this.currentItem.cost));
       this.currentItem.multiplier = 0 - (val/ 100) * (parseFloat(this.currentItem.cost) * (this.currentItem.qty? this.currentItem.qty : 1))
     },
     multiply(val) {
