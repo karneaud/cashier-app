@@ -40,7 +40,8 @@ module.exports = function (ctx) {
         'QItemSection',
         'QItemLabel',
         'QFooter',
-        'QAvatar'
+        'QAvatar',
+        'QInput'
       ],
 
       directives: [
