@@ -11,14 +11,9 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-    <q-footer class="bg-grey-8 text-white">
+    <q-footer class="bg-grey-1">
       <q-toolbar>
-        <q-toolbar-title>
-          <q-avatar>
-            <img src="https://cdn.quasar-framework.org/logo/svg/quasar-logo.svg">
-          </q-avatar>
-          Title
-        </q-toolbar-title>
+        <q-input type="number" prefix="$" :value="total" label="Total" stack-label />
       </q-toolbar>
     </q-footer>
   </q-layout>
@@ -27,6 +22,15 @@
 export default {
   data () {
     return {
+      total: 0
+    }
+  },
+  created() {
+    this.$root.$on('getTotal', this.setTotal)
+  },
+  methods: {
+    setTotal(val) {
+      this.total = total
     }
   }
 }
