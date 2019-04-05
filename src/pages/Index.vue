@@ -13,7 +13,6 @@
       </div>
     </div>
   </q-page>
-
 </template>
 <style>
 </style>
@@ -23,7 +22,7 @@ export default {
   name: 'PageIndex',
   data() {
     return {
-      items: [],
+      items: []
     }
   },
   computed: {
@@ -33,7 +32,9 @@ export default {
   },
   methods: {
     keypadPressed(...val) {
-      let operator, amt = val
+      if(this.currentItem == null) return false
+
+      let [amt, operator ] = val
       switch (operator) {
         case "%":
           this.discount(amt)
@@ -44,15 +45,18 @@ export default {
       }
     },
     itemSelected(item) {
-      this.items.$set(this.items.length, item)
+      this.$set( this.items, this.items.length, item)
     },
     discount(val){
-      this.currentItem.multiplier = 0 - (val/ 100) * parseFloat(this.currentItem.cost)
+      parseFloat(this.currentItem.cost));
+      this.currentItem.multiplier = 0 - (val/ 100) * (parseFloat(this.currentItem.cost) * (this.currentItem.qty? this.currentItem.qty : 1))
     },
     multiply(val) {
       this.currentItem.qty = val;
     },
     cash(val) {
+      if(this.currentItem == null) return false
+
       switch(this.operator) {
         case "%":
           this.discount(val)
