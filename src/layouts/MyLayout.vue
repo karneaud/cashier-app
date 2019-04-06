@@ -11,9 +11,10 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-    <q-footer class="bg-grey-1">
+    <q-footer class="bg-grey-1 text-black">
       <q-toolbar>
-        <q-input type="number" prefix="$" :value="total" label="Total" stack-label />
+        <div class="subtitle">Total</div>
+        <q-toolbar-title style="font-size:3.2rem">${{ total }}</q-toolbar-title>
       </q-toolbar>
     </q-footer>
   </q-layout>
@@ -26,11 +27,11 @@ export default {
     }
   },
   created() {
-    this.$root.$on('getTotal', this.setTotal)
+    this.$root.$on('calculated', this.setTotal)
   },
   methods: {
     setTotal(val) {
-      this.total = total
+      this.total = val
     }
   }
 }
