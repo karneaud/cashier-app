@@ -40,8 +40,7 @@ module.exports = function (ctx) {
         'QItemSection',
         'QItemLabel',
         'QFooter',
-        'QAvatar',
-        'QInput'
+        'QAvatar'
       ],
 
       directives: [
@@ -76,6 +75,7 @@ module.exports = function (ctx) {
     devServer: {
       // https: true,
       // port: 8080,
+      // public: '0.0.0.0',
       open: false // opens browser window automatically
     },
 

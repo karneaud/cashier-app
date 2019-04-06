@@ -3,7 +3,7 @@
     <q-item clickable v-ripple v-for="(item, index) in items" :key="item.referenceid">
       <q-item-section @click.native="selectItemAt(index)">
       <q-item-label overline>{{ item.productitem }}</q-item-label>
-      <q-item-label>{{ item.cost }}</q-item-label>
+      <q-item-label>${{ item.cost | formatNumber }}</q-item-label>
       </q-item-section>
     </q-item>
   </q-list>
