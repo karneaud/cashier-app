@@ -14,7 +14,7 @@
     <q-footer class="bg-grey-1 text-black">
       <q-toolbar>
         <div class="subtitle">Total</div>
-        <q-toolbar-title style="font-size:3.2rem">${{ total }}</q-toolbar-title>
+        <q-toolbar-title style="font-size:3.2rem">${{ total | formatNumber }}</q-toolbar-title>
       </q-toolbar>
     </q-footer>
   </q-layout>
