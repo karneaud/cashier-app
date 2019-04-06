@@ -25,6 +25,9 @@ export default {
       items: []
     }
   },
+  created() {
+    this.$on('calculate', this.calculate)
+  },
   computed: {
     currentItem() {
       return this.items == null? null : this.items[this.items.length - 1]
@@ -43,12 +46,14 @@ export default {
           this.multiply(amt)
           break;
       }
+      this.$emit('calculate')
     },
     itemSelected(item) {
       this.$set( this.items, this.items.length, item)
+      this.$emit('calculate')
     },
     discount(val){
-      this.currentItem.multiplier = 0 - (val/ 100) * (parseFloat(this.currentItem.cost) * (this.currentItem.qty? this.currentItem.qty : 1))
+      this.currentItem.multiplier = 0 - (val/ 100) * (parseFloat(this.currentItem.cost) * (this.currentItem.qty || 1))
     },
     multiply(val) {
       this.currentItem.qty = val;
@@ -64,6 +69,14 @@ export default {
           this.multiply(val)
           break;
       }
+    },
+    calculate() {
+        let amt = 0
+        this.items.forEach(({ qty, cost, multiplier }, i ) => {
+          amt += ((cost * (qty || 1)) + (multiplier || 0))
+        })
+
+        this.$root.$emit('calculated', amt)
     }
   }
 }
