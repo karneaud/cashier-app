@@ -1,12 +1,21 @@
 <template lang="html">
-  <q-list bordered separator>
-    <q-item clickable v-ripple v-for="(item, index) in items" :key="item.referenceid">
-      <q-item-section @click.native="selectItemAt(index)">
-      <q-item-label overline>{{ item.productitem }}</q-item-label>
-      <q-item-label>${{ item.cost | formatNumber }}</q-item-label>
-      </q-item-section>
-    </q-item>
-  </q-list>
+  <div class="fit">
+    <q-input v-model="filterText" bottom-slots>
+      <template v-slot:append>
+       <q-btn round flat icon="search" />
+     </template>
+    </q-input>
+      <div class="container window-height scroll">
+      <q-list bordered separator>
+        <q-item clickable v-ripple v-for="(item, index) in filteredItems" :key="item.referenceid">
+          <q-item-section @click.native="selectItemAt(index)">
+          <q-item-label overline>{{ item.productitem }}</q-item-label>
+          <q-item-label>${{ item.cost | formatNumber }}</q-item-label>
+          </q-item-section>
+        </q-item>
+      </q-list>
+      </div>
+  </div>
 </template>
 
 <script>
@@ -16,11 +25,19 @@ export default {
   name: "MenuItemList",
   data() {
     return {
-      items: []
+      items: [],
+      filterText: ''
     }
   },
   created() {
     this.fetchData()
+  },
+  computed: {
+    filteredItems() {
+      return this.filterText <= 2? this.items : this.items.filter((item, i) => {
+        return item.productitem.search(new RegExp(this.filterText, 'i')) !== -1
+      })
+    }
   },
   methods: {
     fetchData() {
@@ -30,7 +47,7 @@ export default {
         .catch(err => console.log(err))
     },
     selectItemAt( index ) {
-      this.$emit('selectedItem', this.items[index] )
+      this.$emit('selectedItem', this.filteredItems[index] )
     }
   }
 }
