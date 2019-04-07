@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex">
-      <div class="row fit-inherit">
+      <div class="row">
         <div class="col">
           <menuitem-list @selectedItem="itemSelected"></menuitem-list>
         </div>
