@@ -1,17 +1,13 @@
 <template>
-  <q-page class="flex flex-center">
-    <div style="width: 100%; height: calc(100vh - 112px); overflow:hidden">
-      <div class="row" style="height: inherit">
-        <div class="col scroll" style="height: 100%">
-          <div class="container">
-            <menuitem-list @selectedItem="itemSelected"></menuitem-list>
-          </div>
+  <q-page class="flex">
+      <div class="row fit-inherit">
+        <div class="col">
+          <menuitem-list @selectedItem="itemSelected"></menuitem-list>
         </div>
         <div class="col">
           <numpad @pressed="keypadPressed"></numpad>
         </div>
       </div>
-    </div>
   </q-page>
 </template>
 <style>
@@ -26,8 +22,9 @@ export default {
     }
   },
   created() {
-    this.$on('calculate', this.calculate)
-    this.$root.$on('clear', this.clearItems)
+    //this.$on('calculate', this.calculate)
+    this.$root.$on('reset', this.resetItems)
+    this.$root.$on('clear', this.clearItem)
   },
   computed: {
     currentItem() {
@@ -47,15 +44,19 @@ export default {
           this.multiply(amt)
           break;
       }
-      this.$emit('calculate')
+      //this.$emit('calculate')
     },
-    clearItems(){
+    resetItems(){
       this.items = []
-      this.$emit('calculate')
+      //this.$emit('calculate')
+    },
+    clearItem() {
+      this.$delete(this.items, this.items.length - 1)
+      console.log(this.items.length);
     },
     itemSelected(item) {
       this.$set( this.items, this.items.length, item)
-      this.$emit('calculate')
+      //this.$emit('calculate')
     },
     discount(val){
       this.currentItem.multiplier = 0 - (val/ 100) * (parseFloat(this.currentItem.cost) * (this.currentItem.qty || 1))
@@ -82,6 +83,11 @@ export default {
         })
 
         this.$root.$emit('calculated', amt)
+    }
+  },
+  watch: {
+    items: function(n,o) {
+      this.calculate()
     }
   }
 }
