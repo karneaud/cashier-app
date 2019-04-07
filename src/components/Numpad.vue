@@ -1,7 +1,7 @@
 <template>
-  <div class="numpad">
-    <div class="row">
-      <q-btn v-for="n, index in this.keypads" :key="index" class="col-4" :flat="n !== 'add'" :color="isKey(n)" size="xl"  :label="n" @click="press(n)"/>
+  <div id="numpad" class="fit">
+    <div class="row fit">
+      <q-btn v-for="n, index in this.keypads" :key="index" v-bind:class="{ number: !isNaN(n) }" class="col-4 no-border-radius" :outline="!isNaN(n) || (/[^\w\d]|(reset|clear)/).test(n)" :flat="(/reset|clear/).test(n)" :color="isKey(n)" size="xl"  :label="n" @click="press(n)"/>
     </div>
   </div>
 </template>
@@ -23,7 +23,6 @@ export default {
   computed: {
     amount() {
       return this.numbers == ""? 1 : new Number(this.numbers).valueOf()
-
     }
   },
   methods: {
@@ -70,6 +69,11 @@ export default {
    }
 }
 </script>
-
-<style>
+<style lang="scss">
+#numpad {
+  .number .q-btn__content {
+    font-size: 102%;
+    padding: 5%;
+  }
+}
 </style>
