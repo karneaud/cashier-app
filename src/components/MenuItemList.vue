@@ -1,21 +1,23 @@
 <template lang="html">
-  <div class="fit">
-    <q-input v-model="filterText" bottom-slots>
-      <template v-slot:append>
-       <q-btn round flat icon="search" />
-     </template>
-    </q-input>
-      <div class="container window-height scroll">
-      <q-list bordered separator>
-        <q-item clickable v-ripple v-for="(item, index) in filteredItems" :key="item.referenceid">
-          <q-item-section @click.native="selectItemAt(index)">
-          <q-item-label overline>{{ item.productitem }}</q-item-label>
-          <q-item-label>${{ item.cost | formatNumber }}</q-item-label>
-          </q-item-section>
-        </q-item>
-      </q-list>
+    <div class="flex column fit">
+      <q-input id="filter-menuitem" v-model="filterText">
+        <template v-slot:append>
+         <q-btn round flat icon="search" />
+       </template>
+      </q-input>
+      <div class="overflow-hidden scroll" style="flex: 1; height: 0">
+        <q-scroll-area style="height: 100%;">
+        <q-list bordered separator class="scroll">
+          <q-item clickable v-ripple v-for="(item, index) in filteredItems" :key="item.referenceid">
+            <q-item-section @click.native="selectItemAt(index)">
+            <q-item-label overline>{{ item.productitem }}</q-item-label>
+            <q-item-label>${{ item.cost | formatNumber }}</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-scroll-area>
       </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -52,6 +54,11 @@ export default {
   }
 }
 </script>
-
-<style lang="css">
+<style lang="scss">
+#filter-menuitem {
+  .q-field__native {
+    padding-left: 8px;
+    font-size: 1.5rem;
+  }
+}
 </style>
