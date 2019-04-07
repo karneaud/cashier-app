@@ -12,27 +12,12 @@
       <router-view />
     </q-page-container>
     <q-footer class="bg-grey-1 text-black">
-      <q-toolbar>
-        <div class="subtitle">Total</div>
-        <q-toolbar-title style="font-size:3.2rem">${{ total | formatNumber }}</q-toolbar-title>
-      </q-toolbar>
+      <input-display />
     </q-footer>
   </q-layout>
 </template>
 <script>
 export default {
-  data () {
-    return {
-      total: 0
-    }
-  },
-  created() {
-    this.$root.$on('calculated', this.setTotal)
-  },
-  methods: {
-    setTotal(val) {
-      this.total = val
-    }
-  }
+
 }
 </script>
