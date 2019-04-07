@@ -53,16 +53,19 @@ export default {
     },
     send() {
       this.$emit('pressed', this.amount, this.operator)
-      this.clear()
+      this.clearData()
     },
     clear() {
-      this.operator = "*"
-      this.numbers = ""
+      this.clearData()
       this.$root.$emit('clear')
     },
     reset() {
-      this.clear()
+      this.clearData()
       this.$root.$emit('reset')
+    },
+    clearData() {
+      this.operator = "*"
+      this.numbers = ""
     }
    }
 }
