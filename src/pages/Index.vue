@@ -27,6 +27,7 @@ export default {
   },
   created() {
     this.$on('calculate', this.calculate)
+    this.$root.$on('clear', this.clearItems)
   },
   computed: {
     currentItem() {
@@ -46,6 +47,10 @@ export default {
           this.multiply(amt)
           break;
       }
+      this.$emit('calculate')
+    },
+    clearItems(){
+      this.items = []
       this.$emit('calculate')
     },
     itemSelected(item) {

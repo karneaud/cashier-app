@@ -55,6 +55,7 @@ export default {
     clear() {
       this.operator = "*"
       this.numbers = ""
+      this.$root.$emit('clear')
     }
    }
 }
