@@ -25,7 +25,7 @@ export default {
   },
   created() {
     this.$root.$on('calculated', this.setTotal)
-    this.$root.$on('clear', this.clearPaid)
+    this.$root.$on('reset', this.resetPaid)
   },
   computed: {
     balance() {
@@ -36,7 +36,7 @@ export default {
     setTotal(val) {
       this.total = val
     },
-    clearPaid() {
+    resetPaid() {
       this.paid = 0
     }
   }
