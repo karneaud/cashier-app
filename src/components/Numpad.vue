@@ -11,7 +11,7 @@ export default {
   props: {
     keypads :  {
       type: Array,
-      default: () => [1,2,3,4,5,6,7,8,9,0,'*','%',"add","clear"]
+      default: () => [1,2,3,4,5,6,7,8,9,0,'*','%',"add","clear","reset"]
     }
   },
   data() {
@@ -31,11 +31,13 @@ export default {
       var cl = "primary"
       switch (key) {
         case "add":
-          cl = "secondary"
+          cl = "primary"
           break;
         case "clear":
-          cl = "red"
+          cl = "secondary"
           break;
+        case "reset":
+          cl = "red"
         default:
           break;
       }
@@ -45,6 +47,7 @@ export default {
     press(key) {
     if(key == "add") this.send()
       else if(key == "clear") this.clear()
+      else if(key == "reset") this.reset()
       else if(isNaN(key))this.operator = key
       else this.numbers = this.numbers.concat(key)
     },
@@ -55,6 +58,11 @@ export default {
     clear() {
       this.operator = "*"
       this.numbers = ""
+      this.$root.$emit('clear')
+    },
+    reset() {
+      this.clear()
+      this.$root.$emit('reset')
     }
    }
 }
