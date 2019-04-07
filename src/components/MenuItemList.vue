@@ -2,7 +2,7 @@
     <div class="flex column fit">
       <q-input id="filter-menuitem" v-model="filterText">
         <template v-slot:append>
-         <q-btn round flat icon="search" />
+         <q-btn round flat :icon="filterText == ''? 'search' : 'close'" @click="close" />
        </template>
       </q-input>
       <div class="overflow-hidden scroll" style="flex: 1; height: 0">
@@ -50,6 +50,9 @@ export default {
     },
     selectItemAt( index ) {
       this.$emit('selectedItem', this.filteredItems[index] )
+    },
+    close() {
+      if(this.filterText !== '') this.filterText = ''
     }
   }
 }
