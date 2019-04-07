@@ -52,17 +52,17 @@ export default {
     },
     clearItem() {
       this.$delete(this.items, this.items.length - 1)
-      console.log(this.items.length);
     },
     itemSelected(item) {
       this.$set( this.items, this.items.length, item)
-      //this.$emit('calculate')
     },
     discount(val){
-      this.currentItem.multiplier = 0 - (val/ 100) * (parseFloat(this.currentItem.cost) * (this.currentItem.qty || 1))
+      this.currentItem.multiplier = 0 - ((val/ 100) * (parseFloat(this.currentItem.cost) * (this.currentItem.qty || 1))).toFixed(2)
+      this.$set(this.items, this.items.length - 1, this.currentItem)
     },
     multiply(val) {
-      this.currentItem.qty = val;
+      this.currentItem.qty = val
+      this.$set(this.items, this.items.length - 1, this.currentItem)
     },
     cash(val) {
       if(this.currentItem == null) return false
