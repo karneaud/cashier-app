@@ -1,13 +1,13 @@
 <template lang="html">
     <div class="flex column fit">
-      <q-input id="filter-menuitem" v-model="filterText">
+      <q-input id="menu-item-filter" v-model="filterText">
         <template v-slot:append>
          <q-btn round flat :icon="filterText == ''? 'search' : 'close'" @click="close" />
        </template>
       </q-input>
       <div class="overflow-hidden scroll" style="flex: 1; height: 0">
         <q-scroll-area style="height: 100%;">
-        <q-list bordered separator class="scroll">
+        <q-list id="menu-item-list" bordered separator class="scroll">
           <q-item clickable v-ripple v-for="(item, index) in filteredItems" :key="item.referenceid">
             <q-item-section @click.native="selectItemAt(index)">
             <q-item-label overline>{{ item.productitem }}</q-item-label>
@@ -45,7 +45,11 @@ export default {
     fetchData() {
       this.$axios
         .get(DATA_URL)
-        .then((resp) => this.items = resp.data.response.data )
+        .then((resp) => this.items = resp.data.response.data.map((item, index) => {
+          item['qty'] = 1
+          item['multiplier'] = 0
+          return item
+        }) )
         .catch(err => console.log(err))
     },
     selectItemAt( index ) {
@@ -58,10 +62,22 @@ export default {
 }
 </script>
 <style lang="scss">
-#filter-menuitem {
+#menu-item-filter {
   .q-field__native {
     padding-left: 8px;
     font-size: 1.5rem;
+  }
+}
+#menu-item-list {
+  .q-item {
+    .q-item__section {
+      font-size: 1.8rem;
+    }
+
+     .text-overline {
+       font-size: 1rem;
+
+     }
   }
 }
 </style>
