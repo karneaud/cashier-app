@@ -25,7 +25,7 @@ module.exports = function (ctx) {
 
     framework: {
       // all: true, // --- includes everything; for dev only!
-
+      cssAddons: true,
       components: [
         'QLayout',
         'QHeader',
