@@ -1,17 +1,27 @@
 <template lang="html">
   <div id="input-display" class="row q-pa-sm">
-    <div class="col text-red">
-      <span class="subtitle">Total: </span>
-      <span style="font-size:3.2rem">${{ total | formatNumber }}</span>
-    </div>
     <div class="col">
-      <div class="q-mx-md">
-        <q-input label-stacked label="paid" prefix="$" v-model="paid"/>
+      <div class="fit flex items-end">
+        <div class="q-px-sm text-red">
+          <span class="subtitle">TOTAL: </span>
+          <span class="text-h3">${{ total | formatNumber }}</span>
+        </div>
       </div>
     </div>
-    <div class="col text-green">
-      <span class="subtitle">Change: </span>
-      <span style="font-size:2.2rem">${{ balance | formatNumber }}</span>
+    <div class="col">
+        <div class="fit flex items-end">
+      <div class="q-px-sm">
+          <q-input  placeholder="Amount Paid?" label-stacked label="PAID:" prefix="$" v-model="paid"/>
+      </div>
+    </div>
+    </div>
+    <div class="col">
+      <div class="fit flex items-end justify-end">
+        <div class="q-px-sm text-green">
+          <span class="subtitle">BALANCE: </span>
+          <span class="text-h4">${{ balance | formatNumber }}</span>
+        </div>
+      </div>
     </div>
   </div>
 </template>
