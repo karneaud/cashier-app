@@ -1,7 +1,15 @@
 <template>
   <div id="numpad" class="fit">
     <div class="row fit">
-      <q-btn v-for="n, index in this.keypads" :key="index" v-bind:class="{ number: !isNaN(n) }" class="col-4 no-border-radius" :outline="!isNaN(n) || (/[^\w\d]|(reset|clear)/).test(n)" :flat="(/reset|clear/).test(n)" :color="isKey(n)" size="xl"  :label="n" @click="press(n)"/>
+      <q-btn
+        v-for="n, index in this.keypads"
+        :key="index"
+        v-bind:class="{ number: !isNaN(n) }"
+        class="col-4 no-border-radius"
+        :color="(/add/).test(n)? 'primary' : 'white'"
+        :push="!isNaN(n) || (/[^\w\d]|(reset|clear)/).test(n)"
+        :flat="(/reset|clear/).test(n)"
+        :text-color="isKey(n)" size="2rem"  :label="n" @click="press(n)"/>
     </div>
   </div>
 </template>
@@ -30,7 +38,7 @@ export default {
       var cl = "primary"
       switch (key) {
         case "add":
-          cl = "primary"
+          cl = "white"
           break;
         case "clear":
           cl = "secondary"
