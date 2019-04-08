@@ -8,10 +8,13 @@
       <div class="overflow-hidden scroll" style="flex: 1 1 0%; height: 0">
         <q-scroll-area style="height: 100%;">
         <q-list id="menu-item-list" bordered separator class="scroll">
-          <q-item clickable v-ripple v-for="(item, index) in filteredItems" :key="item.referenceid">
-            <q-item-section @click.native="selectItemAt(index)">
+          <q-item clickable @click.native="selectItemAt(index)" v-ripple v-for="(item, index) in filteredItems" :key="item.referenceid">
+            <q-item-section>
             <q-item-label overline>{{ item.productitem }}</q-item-label>
             <q-item-label>${{ item.cost | formatNumber }}</q-item-label>
+            </q-item-section>
+            <q-item-section side>
+              <q-icon name="add"/>
             </q-item-section>
           </q-item>
         </q-list>
@@ -77,12 +80,11 @@ export default {
 #menu-item-list {
   .q-item {
     .q-item__section {
-      font-size: 1.8rem;
+      font-size: 2rem;
     }
 
      .text-overline {
-       font-size: 1rem;
-
+       font-size: 1.2rem;
      }
   }
 }
