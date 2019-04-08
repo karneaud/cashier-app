@@ -59,7 +59,7 @@ export default {
         .catch(err => console.log(err))
     },
     selectItemAt( index ) {
-      this.$emit('selectedItem', this.filteredItems[index] )
+      this.$emit('selectedItem', Object.assign({}, this.filteredItems[index]) )
     },
     close() {
       if(this.filterText !== '') this.filterText = ''
