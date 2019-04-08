@@ -1,11 +1,11 @@
 <template lang="html">
     <div class="flex column fit">
-      <q-input id="menu-item-filter" v-model="filterText">
+      <q-input label-stacked placeholder="Search Products" id="menu-item-filter" v-model="filterText">
         <template v-slot:append>
          <q-btn round flat :icon="filterText == ''? 'search' : 'close'" @click="close" />
        </template>
       </q-input>
-      <div class="overflow-hidden scroll" style="flex: 1; height: 0">
+      <div class="overflow-hidden scroll" style="flex: 1 1 0%; height: 0">
         <q-scroll-area style="height: 100%;">
         <q-list id="menu-item-list" bordered separator class="scroll">
           <q-item clickable v-ripple v-for="(item, index) in filteredItems" :key="item.referenceid">
@@ -49,6 +49,12 @@ export default {
           item['qty'] = 1
           item['multiplier'] = 0
           return item
+        }).sort((a, b) => {
+            let x = a.productitem.toLowerCase(), y = b.productitem.toLowerCase()
+            if (x < y) return -1
+            else if (x > y) return 1
+
+            return 0
         }) )
         .catch(err => console.log(err))
     },
