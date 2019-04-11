@@ -22,7 +22,6 @@ module.exports = function (ctx) {
       // 'fontawesome-v5',
       // 'eva-icons'
     ],
-
     framework: {
       // all: true, // --- includes everything; for dev only!
       cssAddons: true,
@@ -31,6 +30,7 @@ module.exports = function (ctx) {
         'QHeader',
         'QPageContainer',
         'QPage',
+        'QPageSticky',
         'QToolbar',
         'QToolbarTitle',
         'QBtn',
@@ -42,7 +42,9 @@ module.exports = function (ctx) {
         'QFooter',
         'QAvatar',
         'QInput',
-        'QScrollArea'
+        'QScrollArea',
+        'QFab',
+        'QFabAction'
       ],
 
       directives: [
@@ -57,7 +59,6 @@ module.exports = function (ctx) {
       // iconSet: 'ionicons-v4'
       // lang: 'de' // Quasar language
     },
-
     supportIE: false,
 
     build: {
@@ -82,7 +83,7 @@ module.exports = function (ctx) {
     },
 
     // animations: 'all' --- includes all animations
-    animations: [],
+    animations: ['slideInUp', 'slideOutDown'],
 
     ssr: {
       pwa: false
