@@ -11,7 +11,7 @@
     <q-page-container>
       <router-view />
     </q-page-container>
-    <q-footer class="bg-grey-1 text-black">
+    <q-footer class="bg-blue-grey-1 text-black">
       <input-display />
     </q-footer>
   </q-layout>
