@@ -11,7 +11,7 @@
     <div class="col">
         <div class="fit flex items-end">
       <div class="q-px-sm">
-          <q-input  placeholder="Amount Paid?" label-stacked label="PAID:" prefix="$" v-model="paid"/>
+          <q-input @focus="() => this.paid = ''" placeholder="Amount Paid?" label-stacked label="ENTER AMOUNT PAID:" prefix="$" v-model="paid"/>
       </div>
     </div>
     </div>
