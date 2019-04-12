@@ -1,51 +1,38 @@
 <template lang="html">
   <div id="input-display" class="row q-pa-sm">
     <div class="col">
-      <div class="fit flex items-end">
         <div class="q-px-sm text-red">
           <span class="subtitle">TOTAL: </span>
-          <span class="text-h3">${{ total | formatNumber }}</span>
+          <span class="text-h3">${{ totalAmount | formatNumber }}</span>
         </div>
-      </div>
-    </div>
-    <div class="col">
-        <div class="fit flex items-end">
-      <div class="q-px-sm">
-          <q-input @focus="() => this.paid = ''" placeholder="Amount Paid?" label-stacked label="ENTER AMOUNT PAID:" prefix="$" v-model="paid"/>
-      </div>
-    </div>
-    </div>
-    <div class="col">
-      <div class="fit flex items-end justify-end">
-        <div class="q-px-sm text-green">
+        <div class="q-px-sm">
           <span class="subtitle">BALANCE: </span>
           <span class="text-h4">${{ balance | formatNumber }}</span>
         </div>
-      </div>
+        <div class="q-px-sm">
+          <q-input @focus="() => this.paid = ''" placeholder="Amount Paid?" label-stacked label="ENTER AMOUNT PAID:" prefix="$" v-model="paid"/>
+        </div>
     </div>
   </div>
 </template>
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   data () {
     return {
-      total: 0.00,
       paid: 0.00
     }
   },
   created() {
-    this.$root.$on('calculated', this.setTotal)
     this.$root.$on('reset', this.resetPaid)
   },
   computed: {
     balance() {
-      return this.paid > 0? (this.paid - this.total) : 0
-    }
+      return this.paid > 0? (this.paid - this.totalAmount ) : 0
+    }, ...mapGetters('items', ['totalAmount'])
   },
   methods: {
-    setTotal(val) {
-      this.total = val
-    },
     resetPaid() {
       this.paid = 0
     }
