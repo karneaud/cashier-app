@@ -24,6 +24,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 const DATA_URL = '/statics/data.json'//'https://script.googleusercontent.com/macros/echo?user_content_key=kgdyUzqFZfuVjMTnDk0vybnZqOkDXtOyiEtvtRkPd1zMVm-lXuP5quuBysIhkgDz4jVWdhojxCPHDDLilbp6O4teF5wchcvym5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnMAKL8Dkb2fCosxeD8IBkIRr56m5kaiyo0PkdD87xLd0XLE9GqYh-Q00qZpz_rcIdyVat5nbPrdi&lib=MMf4lBzMS3S64qVRHlJaffCqfKfrijX5m';
 
 export default {
@@ -61,12 +63,11 @@ export default {
         }) )
         .catch(err => console.log(err))
     },
-    selectItemAt( index ) {
-      this.$emit('selectedItem', Object.assign({}, this.filteredItems[index]) )
-    },
     close() {
       if(this.filterText !== '') this.filterText = ''
-    }
+    }, selectItemAt( index ) {
+      this.addItem( Object.assign({ }, this.filteredItems[ index ]) )
+    }, ...mapActions('items', ['addItem'])
   }
 }
 </script>

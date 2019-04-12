@@ -14,6 +14,8 @@
   </div>
 </template>
 <script>
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
   name: 'Numpad',
   props: {
@@ -31,7 +33,7 @@ export default {
   computed: {
     amount() {
       return this.numbers == ""? 1 : new Number(this.numbers).valueOf()
-    }
+    },...mapGetters('items', ['currentItem'])
   },
   methods: {
     isKey(key) {
@@ -52,28 +54,31 @@ export default {
       return cl
     },
     press(key) {
-    if(key == "add") this.send()
+      if(key == "add") this.calculate()
       else if(key == "clear") this.clear()
       else if(key == "reset") this.reset()
       else if(isNaN(key))this.operator = key
       else this.numbers = this.numbers.concat(key)
     },
-    send() {
-      this.$emit('pressed', this.amount, this.operator)
+    calculate() {
+      if(!this.currentItem) return
+      else if(this.operator == '%') this.addItemDiscount(this.amount)
+      else this.addItemQty(this.amount)
+
       this.clearData()
     },
     clear() {
       this.clearData()
-      this.$root.$emit('clear')
+      this.removeItem()
     },
     reset() {
       this.clearData()
-      this.$root.$emit('reset')
+      this.clearItems()
     },
     clearData() {
       this.operator = "*"
       this.numbers = ""
-    }
+    }, ...mapActions('items', ['removeItem', 'clearItems', 'addItemQty', 'addItemDiscount'])
    }
 }
 </script>

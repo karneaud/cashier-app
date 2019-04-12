@@ -2,11 +2,11 @@
   <q-page class="flex full-height">
         <div class="row">
           <div class="col">
-              <menuitem-list @selectedItem="itemSelected"></menuitem-list>
+              <menuitem-list></menuitem-list>
           </div>
           <div class="col">
             <div class="fit q-pa-md bg-blue-grey-1">
-              <numpad @pressed="keypadPressed"></numpad>
+              <numpad></numpad>
             </div>
           </div>
         </div>
