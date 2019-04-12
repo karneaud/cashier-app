@@ -6,7 +6,16 @@
           </div>
           <div class="col">
             <div class="fit q-pa-md bg-blue-grey-1">
-              <numpad></numpad>
+              <div class="row">
+                  <div class="col">
+                    <numpad></numpad>
+                  </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <input-display></input-display>
+                </div>
+              </div>
             </div>
           </div>
         </div>
