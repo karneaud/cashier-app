@@ -1,17 +1,26 @@
 <template lang="html">
-  <div id="input-display" class="row q-pa-sm">
-    <div class="col">
-        <div class="q-px-sm text-red">
+  <div id="input-display" class="q-pa-sm">
+    <div class="row text-red border-bottom q-my-md">
+        <div class="col">
           <span class="subtitle">TOTAL: </span>
+        </div>
+        <div class="col text-right">
           <span class="text-h3">${{ totalAmount | formatNumber }}</span>
         </div>
-        <div class="q-px-sm">
+      </div>
+      <div class="row q-mb-md">
+        <div class="col">
+            <q-input @blur="() => this.paid > 0? this.paid : 0" @focus="() => this.paid = this.paid > 0? this.paid : ''" label-stacked label="ENTER AMOUNT PAID:" prefix="$" v-model="paid"/>
+          </div>
+    </div>
+    <div class="row text-green">
+       <div class="col">
           <span class="subtitle">BALANCE: </span>
+        </div>
+        <div class="col text-right">
           <span class="text-h4">${{ balance | formatNumber }}</span>
         </div>
-        <div class="q-px-sm">
-          <q-input @focus="() => this.paid = ''" placeholder="Amount Paid?" label-stacked label="ENTER AMOUNT PAID:" prefix="$" v-model="paid"/>
-        </div>
+      </div>
     </div>
   </div>
 </template>
