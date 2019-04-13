@@ -1,7 +1,7 @@
 <template lang="html">
     <div class="flex column fit">
       <div class="col-auto">
-        <q-input label-stacked outlined filled rounded placeholder="Search Products" id="menu-item-filter" v-model="filterText">
+        <q-input label-stacked outlined filled placeholder="Search Products" id="menu-item-filter" v-model="filterText">
           <template v-slot:append>
            <q-btn round flat :icon="filterText == ''? 'search' : 'close'" @click="close" />
          </template>
@@ -13,7 +13,7 @@
             <q-item clickable @click.native="selectItemAt(index)" v-ripple v-for="(item, index) in filteredItems" :key="item.referenceid">
               <q-item-section>
               <q-item-label overline>{{ item.productitem }}</q-item-label>
-              <q-item-label>${{ item.cost | formatNumber }}</q-item-label>
+              <q-item-label class="text-primary">${{ item.cost | formatNumber }}</q-item-label>
               </q-item-section>
               <q-item-section side>
                 <q-icon name="add"/>
