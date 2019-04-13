@@ -42,9 +42,11 @@ module.exports = function (ctx) {
         'QFooter',
         'QAvatar',
         'QInput',
+        'QBadge',
         'QScrollArea',
         'QFab',
-        'QFabAction'
+        'QFabAction',
+        'QSeparator'
       ],
 
       directives: [
@@ -93,11 +95,11 @@ module.exports = function (ctx) {
       // workboxPluginMode: 'InjectManifest',
       // workboxOptions: {},
       manifest: {
-        // name: 'Quasar App',
-        // short_name: 'Quasar-PWA',
-        // description: 'Best PWA App in town!',
+        name: 'Cashier App',
+        short_name: 'Mobile Cashier Application',
+        description: 'Best PWA App in town!',
         display: 'standalone',
-        orientation: 'portrait',
+        orientation: 'landscape',
         background_color: '#ffffff',
         theme_color: '#027be3',
         icons: [
