@@ -1,5 +1,5 @@
 <template lang="html">
-  <div id="input-display" class="q-pa-sm">
+  <div id="input-display">
     <div class="row text-red border-bottom q-my-md">
         <div class="col">
           <span class="subtitle">TOTAL: </span>
