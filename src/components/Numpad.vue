@@ -1,16 +1,14 @@
 <template>
-  <div id="numpad" class="fit">
-    <div class="row fit">
-      <q-btn
-        v-for="n, index in this.keypads"
-        :key="index"
-        v-bind:class="{ number: !isNaN(n) }"
-        class="col-4 no-border-radius"
-        :color="(/add/).test(n)? 'primary' : 'white'"
-        :push="!isNaN(n) || (/[^\w\d]|(reset|clear)/).test(n)"
-        :flat="(/reset|clear/).test(n)"
-        :text-color="isKey(n)" size="2rem"  :label="n" @click="press(n)"/>
-    </div>
+  <div id="numpad" class="flex flex-wrap fit row">
+    <q-btn
+      v-for="n, index in this.keypads"
+      :key="index"
+      v-bind:class="{ number: !isNaN(n) }"
+      class="col-4 flex-shrink no-border-radius"
+      :color="(/add/).test(n)? 'primary' : 'white'"
+      :push="!isNaN(n) || (/[^\w\d]|(reset|clear)/).test(n)"
+      :flat="(/reset|clear/).test(n)"
+      :text-color="isKey(n)" :label="n" @click="press(n)"/>
   </div>
 </template>
 <script>
@@ -85,9 +83,8 @@ export default {
 </script>
 <style lang="scss">
 #numpad {
-  .number .q-btn__content {
-    font-size: 102%;
-    padding: 5%;
+  .number.q-btn {
+    font-size: 150%;
   }
 }
 </style>
