@@ -1,24 +1,26 @@
 <template lang="html">
     <div class="flex column fit">
-      <q-input label-stacked placeholder="Search Products" id="menu-item-filter" v-model="filterText">
-        <template v-slot:append>
-         <q-btn round flat :icon="filterText == ''? 'search' : 'close'" @click="close" />
-       </template>
-      </q-input>
-      <div class="overflow-hidden scroll" style="flex: 1 1 0%; height: 0">
-        <q-scroll-area style="height: 100%;">
-        <q-list id="menu-item-list" bordered separator class="scroll">
-          <q-item clickable @click.native="selectItemAt(index)" v-ripple v-for="(item, index) in filteredItems" :key="item.referenceid">
-            <q-item-section>
-            <q-item-label overline>{{ item.productitem }}</q-item-label>
-            <q-item-label>${{ item.cost | formatNumber }}</q-item-label>
-            </q-item-section>
-            <q-item-section side>
-              <q-icon name="add"/>
-            </q-item-section>
-          </q-item>
-        </q-list>
-      </q-scroll-area>
+      <div class="col-auto">
+        <q-input label-stacked outlined filled rounded placeholder="Search Products" id="menu-item-filter" v-model="filterText">
+          <template v-slot:append>
+           <q-btn round flat :icon="filterText == ''? 'search' : 'close'" @click="close" />
+         </template>
+        </q-input>
+      </div>
+      <div class="flex col">
+        <q-scroll-area class="flex fit" style="min-height:100%; max-height:100%;">
+          <q-list id="menu-item-list" bordered separator>
+            <q-item clickable @click.native="selectItemAt(index)" v-ripple v-for="(item, index) in filteredItems" :key="item.referenceid">
+              <q-item-section>
+              <q-item-label overline>{{ item.productitem }}</q-item-label>
+              <q-item-label>${{ item.cost | formatNumber }}</q-item-label>
+              </q-item-section>
+              <q-item-section side>
+                <q-icon name="add"/>
+              </q-item-section>
+            </q-item>
+          </q-list>
+        </q-scroll-area>
       </div>
     </div>
 </template>
