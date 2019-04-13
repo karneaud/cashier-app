@@ -19,13 +19,15 @@
             </div>
           </div>
         </div>
-       <q-btn fab id="shopping-action-button" class="bottom fixed-center" icon="shopping_basket" @click="showItems = !showItems" color="accent" />
+       <transition appear enter-active-class="animated zoomIn"
+       leave-active-class="animated zoomOut">
+         <q-btn fab id="shopping-action-button" class="bottom fixed-center" icon="shopping_basket" @click="showItems = !showItems" color="accent" v-show="total > 0" />
+       </transition>
        <shopping-list :show-list="showItems"></shopping-list>
   </q-page>
 </template>
-<style lang="scss">
-</style>
 <script>
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'PageIndex',
@@ -33,6 +35,9 @@ export default {
     return {
       showItems: false
     }
+  },
+  computed: {
+    ...mapGetters('items', ['total'])
   }
 }
 </script>
