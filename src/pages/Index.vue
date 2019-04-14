@@ -2,7 +2,7 @@
   <q-page class="bg-blue-grey-1">
         <div class="flex absolute fit">
           <div class="flex col row">
-            <div class="flex col-7 q-pa-sm">
+            <div class="column flex col-7 q-pa-sm">
               <menuitem-list></menuitem-list>
             </div>
             <div class="col-5">
@@ -17,12 +17,6 @@
             </div>
           </div>
         </div>
-         <q-page-sticky position="bottom-right" :offset="[325,25]">
-         <transition appear enter-active-class="animated zoomIn"
-         leave-active-class="animated zoomOut">
-           <q-btn fab id="shopping-action-button"  icon="shopping_basket" @click="showItems = !showItems" color="accent" v-show="total > 0" />
-         </transition>
-       </q-page-sticky>
        <shopping-list :show-list="showItems"></shopping-list>
   </q-page>
 </template>
@@ -36,8 +30,16 @@ export default {
       showItems: false
     }
   },
+  created() {
+    this.$root.$on('showItems', () => this.showItems = !this.showItems )
+  },
   computed: {
     ...mapGetters('items', ['total'])
+  },
+  watch: {
+    'total' : function(n,o) {
+      if((n == 0) && (this.showItems == true)) this.showItems = false
+    }
   }
 }
 </script>
