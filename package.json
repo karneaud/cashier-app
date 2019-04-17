@@ -7,7 +7,8 @@
   "author": "Kendall Arneaud",
   "private": true,
   "scripts": {
-    "test": "quasar test --unit jest --dev='-m spa'"
+    "test": "quasar test --unit jest --dev='-m spa'",
+    "preinstall": "yarn -g add @vue/cli @vue/cli-init @quasar/cli"
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
