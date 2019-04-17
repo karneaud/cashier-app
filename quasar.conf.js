@@ -78,7 +78,7 @@ module.exports = function (ctx) {
     },
 
     devServer: {
-      // https: true,
+      https: true,
       // port: 8080,
       // public: '0.0.0.0',
       open: false // opens browser window automatically
@@ -92,8 +92,12 @@ module.exports = function (ctx) {
     },
 
     pwa: {
-      // workboxPluginMode: 'InjectManifest',
-      // workboxOptions: {},
+      //workboxPluginMode: 'InjectManifest',
+      workboxOptions: {
+        skipWaiting: true,
+        clientsClaim: true,
+        include: [/\.html$/, /\.js$/,/\.png$/,/\.woff$/],
+      },
       manifest: {
         name: 'Cashier App',
         short_name: 'Mobile Cashier Application',
