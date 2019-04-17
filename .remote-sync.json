@@ -1,0 +1,22 @@
+{
+  "logger": {
+    "title": "Remote Sync"
+  },
+  "uploadOnSave": true,
+  "useAtomicWrites": false,
+  "deleteLocal": false,
+  "hostname": "192.168.100.74",
+  "port": "22",
+  "target": "/var/www/html/cashier-app",
+  "ignore": [
+    ".remote-sync.json",
+    ".git/**",
+    ".git*",
+    "node_modules"
+  ],
+  "username": "kendallarneaud",
+  "keyfile": "/Users/kendallarneaud/.ssh/kendallarneaud_nas4free_rsa",
+  "passphrase": "nasislike",
+  "watch": [],
+  "transport": "scp"
+}
