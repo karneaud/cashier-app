@@ -94,7 +94,7 @@ module.exports = function (ctx) {
     pwa: {
       //workboxPluginMode: 'InjectManifest',
       workboxOptions: {
-        include: [/\.html$/, /\.js$/,/\.png$/,/\.woff$/,/\.json$/],
+        include: [/\.html$/,/\.js$/,/\.png$/,/\.woff$/,/\.json$/],
         runtimeCaching: [
           {
             urlPattern: /js/,
@@ -104,18 +104,18 @@ module.exports = function (ctx) {
                 cacheableResponse: {
                     statuses: [0, 200],
                 },
-            },
-            networkTimeoutSeconds: 10,
-            expiration: {
-              maxEntries: 5,
-              maxAgeSeconds: 15,
-            },
-            // Configure background sync.
-            backgroundSync: {
-              name: 'cash-app-js',
-              options: {
-                maxRetentionTime: 60 * 60,
-              }
+                networkTimeoutSeconds: 10,
+                expiration: {
+                  maxEntries: 5,
+                  maxAgeSeconds: 15,
+                },
+                // Configure background sync.
+                backgroundSync: {
+                  name: 'cash-app-js',
+                  options: {
+                    maxRetentionTime: 60 * 60,
+                  }
+                }
             }
           },
           {
@@ -126,18 +126,18 @@ module.exports = function (ctx) {
                 cacheableResponse: {
                     statuses: [0, 200],
                 },
-            },
-            networkTimeoutSeconds: 10,
-            expiration: {
-              maxEntries: 5,
-              maxAgeSeconds: 15,
-            },
-            // Configure background sync.
-            backgroundSync: {
-              name: 'cash-app-css',
-              options: {
-                maxRetentionTime: 60 * 60,
-              }
+                networkTimeoutSeconds: 10,
+                expiration: {
+                  maxEntries: 5,
+                  maxAgeSeconds: 15,
+                },
+                // Configure background sync.
+                backgroundSync: {
+                  name: 'cash-app-css',
+                  options: {
+                    maxRetentionTime: 60 * 60,
+                  }
+                }
             }
           },
           {
@@ -148,40 +148,39 @@ module.exports = function (ctx) {
                 cacheableResponse: {
                     statuses: [0, 200],
                 },
-            },
-            networkTimeoutSeconds: 10,
-            expiration: {
-              maxEntries: 5,
-              maxAgeSeconds: 15,
-            },
-            // Configure background sync.
-            backgroundSync: {
-              name: 'cash-app-fonts',
-              options: {
-                maxRetentionTime: 60 * 60,
-              }
+                networkTimeoutSeconds: 10,
+                expiration: {
+                  maxEntries: 5,
+                  maxAgeSeconds: 15,
+                },
+                // Configure background sync.
+                backgroundSync: {
+                  name: 'cash-app-fonts',
+                  options: {
+                    maxRetentionTime: 60 * 60,
+                  }
+                }
             }
           },
           {
             urlPattern: new RegExp('^https://script\.googleusercontent\.com/'),
              handler: 'StaleWhileRevalidate',
-             networkTimeoutSeconds: 10,
              options: {
                cacheableResponse: {
                  statuses: [0, 200]
-               }
-             },
-             expiration: {
-              maxEntries: 5,
-              maxAgeSeconds: 60,
-            },
-            // Configure background sync.
-            backgroundSync: {
-              name: 'my-google-sheets',
-              options: {
-                maxRetentionTime: 60 * 60,
-              },
-            },
+               },
+               networkTimeoutSeconds: 10,
+               expiration: {
+                maxEntries: 5,
+                maxAgeSeconds: 60,
+              },// Configure background sync.
+              backgroundSync: {
+                name: 'my-google-sheets',
+                options: {
+                  maxRetentionTime: 60 * 60,
+                }
+              }
+             }
           }
         ]
       },
