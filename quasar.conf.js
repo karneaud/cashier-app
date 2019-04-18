@@ -39,14 +39,14 @@ module.exports = function (ctx) {
         'QItem',
         'QItemSection',
         'QItemLabel',
-        'QFooter',
         'QAvatar',
         'QInput',
         'QBadge',
         'QScrollArea',
         'QFab',
         'QFabAction',
-        'QSeparator'
+        'QSeparator',
+        'QAjaxBar'
       ],
 
       directives: [
