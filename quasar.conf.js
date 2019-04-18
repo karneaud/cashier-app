@@ -95,94 +95,73 @@ module.exports = function (ctx) {
       //workboxPluginMode: 'InjectManifest',
       workboxOptions: {
         include: [/\.html$/,/\.js$/,/\.png$/,/\.woff$/,/\.json$/],
-        runtimeCaching: [
-          {
-            urlPattern: /js/,
-            handler: 'NetworkFirst',
-            options: {
-                cacheName: 'js',
-                cacheableResponse: {
-                    statuses: [0, 200],
-                },
-                networkTimeoutSeconds: 10,
-                expiration: {
-                  maxEntries: 5,
-                  maxAgeSeconds: 15,
-                },
-                // Configure background sync.
-                backgroundSync: {
-                  name: 'cash-app-js',
-                  options: {
-                    maxRetentionTime: 60 * 60,
-                  }
-                }
+        runtimeCaching: [{
+          // Match any same-origin request that contains 'api'.
+          urlPattern: /js/,
+          // Apply a network-first strategy.
+          handler: 'NetworkFirst',
+          options: {
+            // Fall back to the cache after 10 seconds.
+            networkTimeoutSeconds: 10,
+            // Use a custom cache name for this route.
+            cacheName: 'cashier-app-js',
+            // Configure custom cache expiration.
+            expiration: {
+              maxEntries: 5,
+              maxAgeSeconds: 60,
+            },
+            // Configure background sync.
+            backgroundSync: {
+              name: 'cashier-queue-js',
+              options: {
+                maxRetentionTime: 60 * 60,
+              },
+            },
+            // Configure which responses are considered cacheable.
+            cacheableResponse: {
+              statuses: [0, 200]
             }
           },
-          {
-            urlPattern: /css/,
-            handler: 'NetworkFirst',
-            options: {
-                cacheName: 'js',
-                cacheableResponse: {
-                    statuses: [0, 200],
-                },
-                networkTimeoutSeconds: 10,
-                expiration: {
-                  maxEntries: 5,
-                  maxAgeSeconds: 15,
-                },
-                // Configure background sync.
-                backgroundSync: {
-                  name: 'cash-app-css',
-                  options: {
-                    maxRetentionTime: 60 * 60,
-                  }
-                }
+        },{
+          // Match any same-origin request that contains 'api'.
+          urlPattern: /css/,
+          // Apply a network-first strategy.
+          handler: 'NetworkFirst',
+          options: {
+            // Fall back to the cache after 10 seconds.
+            networkTimeoutSeconds: 10,
+            // Use a custom cache name for this route.
+            cacheName: 'cashier-app-css',
+            // Configure custom cache expiration.
+            expiration: {
+              maxEntries: 5,
+              maxAgeSeconds: 60,
+            },
+            // Configure background sync.
+            backgroundSync: {
+              name: 'cashier-queue-css',
+              options: {
+                maxRetentionTime: 60 * 60,
+              },
+            },
+            // Configure which responses are considered cacheable.
+            cacheableResponse: {
+              statuses: [0, 200]
             }
           },
-          {
-            urlPattern: /fonts/,
-            handler: 'NetworkFirst',
-            options: {
-                cacheName: 'fonts',
-                cacheableResponse: {
-                    statuses: [0, 200],
-                },
-                networkTimeoutSeconds: 10,
-                expiration: {
-                  maxEntries: 5,
-                  maxAgeSeconds: 15,
-                },
-                // Configure background sync.
-                backgroundSync: {
-                  name: 'cash-app-fonts',
-                  options: {
-                    maxRetentionTime: 60 * 60,
-                  }
-                }
-            }
           },
           {
-            urlPattern: new RegExp('^https://script\.googleusercontent\.com/'),
-             handler: 'StaleWhileRevalidate',
-             options: {
-               cacheableResponse: {
-                 statuses: [0, 200]
-               },
-               networkTimeoutSeconds: 10,
-               expiration: {
-                maxEntries: 5,
-                maxAgeSeconds: 60,
-              },// Configure background sync.
-              backgroundSync: {
-                name: 'my-google-sheets',
-                options: {
-                  maxRetentionTime: 60 * 60,
-                }
-              }
-             }
+          // To match cross-origin requests, use a RegExp that matches
+          // the start of the origin:
+          urlPattern: new RegExp('^https://script\.googleusercontent\.com/'),
+          handler: 'StaleWhileRevalidate',
+          options: {
+            networkTimeoutSeconds: 10,
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
           }
-        ]
+        }]
       },
       manifest: {
         name: 'Cashier App',
