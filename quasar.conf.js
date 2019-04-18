@@ -103,6 +103,7 @@ module.exports = function (ctx) {
         //   }
         // ]
       },
+      start_url: '/',
       manifest: {
         name: 'Cashier App',
         short_name: 'Mobile Cashier Application',
