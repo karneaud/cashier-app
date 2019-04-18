@@ -103,7 +103,6 @@ module.exports = function (ctx) {
         //   }
         // ]
       },
-      start_url: '/',
       manifest: {
         name: 'Cashier App',
         short_name: 'Mobile Cashier Application',
@@ -112,6 +111,7 @@ module.exports = function (ctx) {
         orientation: 'landscape',
         background_color: '#ffffff',
         theme_color: '#027be3',
+        start_url: '/',
         icons: [
           {
             'src': 'statics/icons/icon-128x128.png',
