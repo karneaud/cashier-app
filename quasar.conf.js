@@ -96,7 +96,7 @@ module.exports = function (ctx) {
       workboxOptions: {
         skipWaiting: true,
         clientsClaim: true,
-        include: [/\.html$/, /\.js$/,/\.png$/,/\.woff$/]
+        include: [/\.html$/, /\.js$/,/\.png$/,/\.woff$/,/\.json$/]
         // runtimeCaching: [
         //   {
         //     urlPattern:
@@ -138,7 +138,8 @@ module.exports = function (ctx) {
             'sizes': '512x512',
             'type': 'image/png'
           }
-        ]
+        ],
+        start_url: '/'
       },
       metaVariables: {
         appleMobileWebAppCapable: 'yes',
