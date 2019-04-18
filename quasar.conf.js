@@ -156,7 +156,7 @@ module.exports = function (ctx) {
           urlPattern: new RegExp('^https://script\.googleusercontent\.com/'),
           handler: 'StaleWhileRevalidate',
           options: {
-            
+
             cacheableResponse: {
               statuses: [0, 200]
             }
@@ -198,8 +198,7 @@ module.exports = function (ctx) {
             'sizes': '512x512',
             'type': 'image/png'
           }
-        ],
-        start_url: '/'
+        ]
       },
       metaVariables: {
         appleMobileWebAppCapable: 'yes',
