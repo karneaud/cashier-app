@@ -96,7 +96,12 @@ module.exports = function (ctx) {
       workboxOptions: {
         skipWaiting: true,
         clientsClaim: true,
-        include: [/\.html$/, /\.js$/,/\.png$/,/\.woff$/],
+        include: [/\.html$/, /\.js$/,/\.png$/,/\.woff$/]
+        // runtimeCaching: [
+        //   {
+        //     urlPattern:
+        //   }
+        // ]
       },
       manifest: {
         name: 'Cashier App',
@@ -133,6 +138,11 @@ module.exports = function (ctx) {
             'type': 'image/png'
           }
         ]
+      },
+      metaVariables: {
+        appleMobileWebAppCapable: 'yes',
+        appleMobileWebAppStatusBarStyle: 'default',
+        msapplicationTileColor: '#ffffff'
       }
     },
 
