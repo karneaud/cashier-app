@@ -156,7 +156,7 @@ module.exports = function (ctx) {
           urlPattern: new RegExp('^https://script\.googleusercontent\.com/'),
           handler: 'StaleWhileRevalidate',
           options: {
-            networkTimeoutSeconds: 10,
+            
             cacheableResponse: {
               statuses: [0, 200]
             }
