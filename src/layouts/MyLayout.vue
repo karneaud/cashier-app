@@ -8,10 +8,13 @@
         </q-toolbar-title>
         <transition appear enter-active-class="animated zoomIn"
         leave-active-class="animated zoomOut">
-          <q-btn flat round dense id="shopping-action-button"  icon="shopping_basket" @click="showItems" v-show="total > 0" />
+          <q-btn flat round dense id="shopping-action-button"  icon="shopping_basket" @click="left = !left" v-show="total > 0" />
         </transition>
       </q-toolbar>
     </q-header>
+    <q-drawer v-model="left" side="left" bordered>
+     <shopping-list></shopping-list>
+    </q-drawer>
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -31,12 +34,17 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
+  data() {
+    return {
+      left: false
+    }
+  },
   computed: {
     ...mapGetters('items', ['total'])
   },
-  methods: {
-    showItems() {
-      this.$root.$emit('showItems')
+  watch: {
+    'total': function(n, o) {
+        if(this.left) left = false
     }
   }
 }
