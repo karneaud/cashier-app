@@ -1,14 +1,11 @@
 <template lang="html">
-  <transition appear :duration="1000"
- enter-active-class="animated slideInUp"
- leave-active-class="animated slideOutDown">
-    <div v-show="showList" id="shopping-basket" style="width: 35%;" class="fixed-bottom bg-white">
+  <div id="shopping-basket" class="bg-white">
       <div class="q-py-sm">
         <h6 class="q-my-sm text-center">
           Cash Items:
         </h6>
         <q-separator spaced inset />
-        <q-list v-show="items.length > 0" id="shoppin-list" separator class="scroll">
+        <q-list v-show="items.length > 0" id="shoppin-list" separator>
           <q-item v-ripple v-for="(item, index) in items" :key="(item.referenceid) + 1" class="q-pr-none">
             <q-item-section avatar>
                 <q-icon @click="removeItem(index)" name="close"/>
@@ -25,18 +22,11 @@
         <h6 class="q-my-sm text-center" v-show="items.length == 0">No Items!</h6>
       </div>
     </div>
-  </transition>
 </template>
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
 
 export default {
-  props: {
-    showList: {
-      type: Boolean,
-      default: false
-    }
-  },
   computed: {
     ...mapGetters('items', [
       'currentItem',
@@ -54,6 +44,3 @@ export default {
   }
 }
 </script>
-
-<style lang="css">
-</style>
