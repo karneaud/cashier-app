@@ -6,7 +6,7 @@
         </h6>
         <q-separator spaced inset />
         <q-list v-show="items.length > 0" id="shoppin-list" separator>
-          <q-item v-ripple v-for="(item, index) in items" :key="(item.referenceid) + 1" class="q-pr-none">
+          <q-item v-ripple v-for="(item, index) in items" :key="(item.referenceid) + index" class="q-pr-none">
             <q-item-section avatar>
                 <q-icon @click="removeItem(index)" name="close"/>
               </q-item-section>
