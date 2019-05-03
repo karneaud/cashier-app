@@ -35,6 +35,7 @@ module.exports = function (ctx) {
         'QToolbarTitle',
         'QBtn',
         'QIcon',
+        'QDrawer',
         'QList',
         'QItem',
         'QItemSection',
@@ -79,8 +80,8 @@ module.exports = function (ctx) {
 
     devServer: {
       https: true,
-      // port: 8080,
-      // public: '0.0.0.0',
+      //port: 8080,
+      public: '0.0.0.0',
       open: false // opens browser window automatically
     },
 
