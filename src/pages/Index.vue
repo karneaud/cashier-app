@@ -17,29 +17,12 @@
             </div>
           </div>
         </div>
-       <shopping-list :show-list="showItems"></shopping-list>
   </q-page>
 </template>
 <script>
 import { mapGetters } from 'vuex'
 
 export default {
-  name: 'PageIndex',
-  data() {
-    return {
-      showItems: false
-    }
-  },
-  created() {
-    this.$root.$on('showItems', () => this.showItems = !this.showItems )
-  },
-  computed: {
-    ...mapGetters('items', ['total'])
-  },
-  watch: {
-    'total' : function(n,o) {
-      if((n == 0) && (this.showItems == true)) this.showItems = false
-    }
-  }
+  name: 'PageIndex'
 }
 </script>
