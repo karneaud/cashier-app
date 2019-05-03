@@ -44,7 +44,7 @@ export default {
   },
   watch: {
     'total': function(n, o) {
-        if(this.left) left = false
+        if((n <= 0) && this.left) this.left = false
     }
   }
 }
