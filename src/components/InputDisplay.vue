@@ -10,7 +10,7 @@
         <p class="text-h5">${{ balance | formatNumber  }}</p>
       </div>
     </div>
-    <q-input @focus="() => this.paid = ''" label-stacked label="ENTER AMOUNT PAID:" prefix="$" v-model="paid"/>
+    <!-- <q-input @focus="() => this.paid = ''" label-stacked label="ENTER AMOUNT PAID:" prefix="$" v-model="paid"/> -->
   </div>
 </template>
 <script>
