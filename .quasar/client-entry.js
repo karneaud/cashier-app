@@ -67,9 +67,6 @@ console.info('[Quasar] Running SPA.')
 
 async function start () {
   const { app, store, router } = await createApp()
-
-  
-
   
   let routeUnchanged = true
   const redirect = url => {
@@ -110,20 +107,8 @@ async function start () {
   if (routeUnchanged === false) {
     return
   }
-  
 
-  
-
-    
-
-    
-
-    new Vue(app)
-
-    
-
-  
-
+  new Vue(app)
 }
 
 start()
