@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import routes from './routes'
+import isAuth from './auth'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,19 @@ export default function (/* { store, ssrContext } */) {
     mode: process.env.VUE_ROUTER_MODE,
     base: process.env.VUE_ROUTER_BASE
   })
+
+  Router.beforeEach((to,from, next) => {
+    to.matched.some( route =>{
+      if(route.meta.requiresAuth){
+        console.log('is auth', isAuth());
+        if(!isAuth()){
+          next({ path: '/login' })
+        }
+      }
+
+      next()
+    })
+})
 
   return Router
 }
