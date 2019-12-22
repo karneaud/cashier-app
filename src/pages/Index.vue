@@ -20,7 +20,6 @@
   </q-page>
 </template>
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
   name: 'PageIndex'
