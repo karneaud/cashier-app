@@ -36,6 +36,9 @@ module.exports = function (ctx) {
         'QBtn',
         'QIcon',
         'QDrawer',
+        'QCard',
+        'QCardSection',
+        'QCardActions',
         'QList',
         'QItem',
         'QItemSection',
@@ -47,7 +50,8 @@ module.exports = function (ctx) {
         'QFab',
         'QFabAction',
         'QSeparator',
-        'QAjaxBar'
+        'QAjaxBar',
+        'QForm'
       ],
 
       directives: [
