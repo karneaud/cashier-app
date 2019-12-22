@@ -34,7 +34,7 @@ export default function (/* { store, ssrContext } */) {
 
       next()
     })
-})
+  })
 
   return Router
 }

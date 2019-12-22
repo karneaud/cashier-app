@@ -1,4 +1,6 @@
 export default {
-  id: null,
-  email: null
+  user: {
+    id: null,
+    email: null
+  }
 }
