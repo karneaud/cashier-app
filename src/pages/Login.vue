@@ -11,7 +11,7 @@
                   <q-form class="q-gutter-md">
                     <q-input filled v-model="address" type="text" suffix="@gmail.com" label="Enter Gmail">
                   </q-input>
-                    <q-input square filled clearable v-model="sheet" type="text" label="Sheet ID#" />
+                    <q-input square filled clearable v-model="url" type="text" label="Sheet ID#/ URL" />
                   </q-form>
                 </q-card-section>
                 <q-card-actions class="q-px-md">
@@ -31,6 +31,8 @@
 import drive from 'drive-db'
 import { mapActions } from 'vuex'
 
+let r = /^https:\/\/docs\.google\.com\/spreadsheets\/d\/(.+)\//
+
 export default {
   name: 'Login',
   data () {
@@ -49,6 +51,14 @@ export default {
         let uname = (this.username == null? '' : this.username)
 
         return uname.substr(0, uname.indexOf('@'))
+      }
+    },
+    url: {
+      set(s) {
+        this.sheet = r.test(s)? s.match(r)[1] : s
+      },
+      get() {
+        return this.sheet
       }
     },
     loaded () {
