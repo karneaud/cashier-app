@@ -7,7 +7,7 @@ Array.prototype.sumWithFunc = function (func) {
     }
 
 export function total ( state ) {
-  return state.items.length
+  return state.items.length > 0? state.items.map((item) => item.qty ).reduce((total, item) => total + item ) : 0
 }
 
 export function currentItem ( state ) {
