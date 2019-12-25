@@ -3,7 +3,7 @@ export function add (state , item ) {
 }
 
 export function remove(state, index) {
-  state.items.splice(index || (state.items.length - 1), 1) 
+  state.items.splice(index || (state.items.length - 1), 1)
 }
 
 export function clear(state) {
