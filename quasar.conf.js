@@ -48,6 +48,7 @@ module.exports = function (ctx) {
         'QBadge',
         'QScrollArea',
         'QFab',
+        'QFooter',
         'QFabAction',
         'QSeparator',
         'QAjaxBar',
