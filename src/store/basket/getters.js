@@ -16,7 +16,7 @@ export function currentItem ( state ) {
 
 export function totalAmount ( state ) {
   let total = state.items.sumWithFunc((item) => {
-    return ( item.cost + item.multiplier) * item.qty
+    return ( parseFloat(item.cost) + item.multiplier) * item.qty
   })
   return total
 }
