@@ -12,7 +12,7 @@
         </transition>
       </q-toolbar>
     </q-header>
-    <q-drawer v-model="left" side="left" bordered>
+    <q-drawer overlay behavior="mobile" v-model="left" side="left" bordered>
      <shopping-list></shopping-list>
     </q-drawer>
     <q-page-container>
@@ -49,7 +49,7 @@ export default {
   watch: {
     'total': function(n, o) {
         if((n <= 0) && this.left) this.left = false
-        
+
         this.footer = n > 0
     }
   }
