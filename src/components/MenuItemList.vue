@@ -26,15 +26,14 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
-
-const DATA_URL = 'https://script.googleusercontent.com/macros/echo?user_content_key=kgdyUzqFZfuVjMTnDk0vybnZqOkDXtOyiEtvtRkPd1zMVm-lXuP5quuBysIhkgDz4jVWdhojxCPHDDLilbp6O4teF5wchcvym5_BxDlH2jW0nuo2oDemN9CCS2h10ox_1xSncGQajx_ryfhECjZEnMAKL8Dkb2fCosxeD8IBkIRr56m5kaiyo0PkdD87xLd0XLE9GqYh-Q00qZpz_rcIdyVat5nbPrdi&lib=MMf4lBzMS3S64qVRHlJaffCqfKfrijX5m';
+import { mapActions, mapGetters } from 'vuex'
+import drive from 'drive-db'
 
 export default {
   name: "MenuItemList",
   data() {
     return {
-      items: [],
+      products: [],
       filterText: ''
     }
   },
@@ -43,16 +42,17 @@ export default {
   },
   computed: {
     filteredItems() {
-      return this.filterText <= 2? this.items : this.items.filter((item, i) => {
+      return this.filterText <= 2? this.products : this.products.filter((item, i) => {
         return item.productitem.search(new RegExp(this.filterText, 'i')) !== -1
       })
-    }
+    },
+    ...mapGetters('user',['getSheetId'])
   },
   methods: {
     fetchData() {
-      this.$axios
-        .get(DATA_URL)
-        .then((resp) => this.items = resp.data.response.data.map((item, index) => {
+      drive({ sheet: this.getSheetId
+          , onload: (prom) => prom.then(
+            (arr) => arr.map((item, index) => {
           item['qty'] = 1
           item['multiplier'] = 0
           return item
@@ -62,7 +62,9 @@ export default {
             else if (x > y) return 1
 
             return 0
-        }) )
+        }))})
+      .then(
+        (resp) => {console.log(resp), this.products = resp} )
         .catch(err => console.log(err))
     },
     close() {
