@@ -8,6 +8,8 @@ export default async ({ Vue }) => {
     },
     filters: {
       formatNumber(value) {
+        if(value === 0) return "0.00"
+
         let number = new String(value.toFixed(2)), numArr = number.split('.')
         return (numArr[0].length < 4)?
           number
