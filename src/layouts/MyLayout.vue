@@ -18,6 +18,9 @@
     <q-page-container>
       <router-view />
     </q-page-container>
+    <q-footer v-model="footer" reveal>
+        <input-display></input-display>
+    </q-footer>
     <q-ajax-bar
       ref="bar"
       position="bottom"
@@ -36,7 +39,8 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      left: false
+      left: false,
+      footer: false
     }
   },
   computed: {
@@ -45,6 +49,8 @@ export default {
   watch: {
     'total': function(n, o) {
         if((n <= 0) && this.left) this.left = false
+        
+        this.footer = n > 0
     }
   }
 }
