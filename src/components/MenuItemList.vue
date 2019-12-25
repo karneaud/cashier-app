@@ -1,7 +1,7 @@
 <template lang="html">
     <div class="flex column fit">
-      <div class="col-auto">
-        <q-input label-stacked outlined filled placeholder="Search Products" id="menu-item-filter" v-model="filterText">
+      <div class="col-auto full">
+        <q-input label-stacked outlined filled placeholder="Search Products" id="menu-item-filter" v-model="filterText" class="full" style="width:100%">
           <template v-slot:append>
            <q-btn round flat :icon="filterText == ''? 'search' : 'close'" @click="close" />
          </template>
