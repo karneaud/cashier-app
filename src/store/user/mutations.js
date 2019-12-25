@@ -1,7 +1,7 @@
-export function setSheetId (state ,  id) {
+export function setId (state ,  id) {
   state.user.id = id
 }
 
-export function setUserEmail (state ,  email) {
+export function setEmail (state ,  email) {
   state.user.email = email
 }
