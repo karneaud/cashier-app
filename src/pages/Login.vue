@@ -9,13 +9,13 @@
               <q-card square bordered class="q-pa-lg shadow-1">
                 <q-card-section>
                   <q-form class="q-gutter-md">
-                    <q-input filled v-model="email" type="text" suffix="@gmail.com" label="Enter Gmail">
+                    <q-input filled v-model="address" type="text" suffix="@gmail.com" label="Enter Gmail">
                   </q-input>
-                    <q-input square filled clearable v-model="sheetId" type="text" label="Sheet ID#" />
+                    <q-input square filled clearable v-model="sheet" type="text" label="Sheet ID#" />
                   </q-form>
                 </q-card-section>
                 <q-card-actions class="q-px-md">
-                  <q-btn ref="loginBtn" :disable="disabled" unelevated color="light-green-7" size="lg" class="full-width" @click="setUserValues" label="Login" />
+                  <q-btn ref="loginBtn" :loading="loaded" :disable="disabled" unelevated color="light-green-7" size="lg" class="full-width" @click="setUserValues" label="Login" />
                 </q-card-actions>
                 <q-card-section class="text-center q-pa-none">
                   <p class="text-grey-6">Not reigistered? Created an Account</p>
@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import drive from 'drive-db'
 import { mapActions } from 'vuex'
 
 export default {
@@ -35,11 +36,12 @@ export default {
   data () {
     return {
       username: null,
-      sheetId: null
+      sheet: null,
+      loading: false
     }
   },
   computed: {
-    email: {
+    address: {
       set(email) {
         this.username = `${ (/@/g).test(email)? email.substr(0, email.indexOf('@')) : email }@gmail.com`
       },
@@ -49,17 +51,23 @@ export default {
         return uname.substr(0, uname.indexOf('@'))
       }
     },
+    loaded () {
+      return this.loading
+    },
     disabled() {
-      return (this.username == null && this.sheetId == null) || (this.sheetId == null)
+      return (this.username == null && this.sheet == null) || (this.sheet == null)
     }
   },
   methods: {
     setUserValues() {
-      if(this.username && this.sheetId) {
+      if(this.username && this.sheet) {
         this.setUserEmail(this.username)
-        this.setSheetId(this.sheetId)
+        this.setSheetId(this.sheet)
+        this.loading = true
+        drive({sheet: this.sheet, cache: 0}).catch((e) => console.log(e)).then(db => {
+          return this.$router.push({ path: '/' })
+        }).finally(() => this.loading = false)
       }
-
     },
     ...mapActions('user', ['setUserEmail', 'setSheetId'])
   }
