@@ -1,30 +1,39 @@
 <template>
-  <div class="q-pa-md no-scroll">
-    <div class="row">
-      <div class="col">
-            <div class="row flex-center">
-              <h5 class="text-h5 q-my-md text-center">Company & Co</h5>
+  <q-layout>
+  <q-page-container>
+    <q-page>
+      <div class="q-pa-md no-scroll window-height">
+        <div class="shadow-1 container rounded-borders fixed-center q-pa-sm width-75">
+          <div class="row">
+            <div class="col-4 q-mr-none">
+              <div class="container full-height center-content" style="flex-direction:column">
+                <q-avatar size="128px" class="q-ma-md">
+                  <img src="https://place-hold.it/300x500" />
+                </q-avatar>
+                <small><a href="">Need Help?</a></small>
+              </div>
             </div>
-            <div class="row flex-center">
-              <q-card square bordered class="q-pa-lg shadow-1">
-                <q-card-section>
-                  <q-form class="q-gutter-md">
-                    <q-input filled v-model="address" type="text" suffix="@gmail.com" label="Enter Gmail">
-                  </q-input>
-                    <q-input square filled clearable v-model="url" type="text" label="Sheet ID#/ URL" />
-                  </q-form>
-                </q-card-section>
-                <q-card-actions class="q-px-md">
-                  <q-btn ref="loginBtn" :loading="loaded" :disable="disabled" unelevated color="light-green-7" size="lg" class="full-width" @click="setUserValues" label="Login" />
-                </q-card-actions>
-                <q-card-section class="text-center q-pa-none">
-                  <p class="text-grey-6">Not reigistered? Created an Account</p>
-                </q-card-section>
-              </q-card>
+            <div class="col">
+              <div class="container">
+                <q-form class="q-pa-md">
+                  <div class="row q-gutter-md items-start">
+                    <q-input filled hint="without @gmail" class="full-width" v-model="address" type="text" suffix="@gmail.com" label="Enter Gmail"/>
+                    <q-input square hint="URL e.g. https://docs.google.com/spreadsheets/d/.../edit" class="full-width" filled clearable v-model="url" type="text" label="Sheet ID#/ URL" />
+                    <q-btn ref="loginBtn" :loading="loaded" :disable="disabled" unelevated color="light-green-7" size="lg" class="full-width" @click="setUserValues" label="Login" />
+                  </div>
+                  <div class="row">
+                    <a href=""><small>See how you create your spreadsheet here</small></a>
+                  </div>
+                </q-form>
+              </div>
             </div>
           </div>
-    </div>
-  </div>
+        </div>
+      </div>
+    </q-page>
+  </q-page-container>
+</q-layout>
+
 </template>
 
 <script>
@@ -85,7 +94,14 @@ export default {
 </script>
 
 <style>
-.q-card {
-  width: 360px;
+.width-75 {
+  max-width: 75%;
+  width: 75%;
 }
+
+.center-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 </style>
