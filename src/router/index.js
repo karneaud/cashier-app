@@ -26,7 +26,6 @@ export default function (/* { store, ssrContext } */) {
   Router.beforeEach((to,from, next) => {
     to.matched.some( route =>{
       if(route.meta.requiresAuth){
-        console.log('is auth', isAuth());
         if(!isAuth()){
           next({ path: '/login' })
         }
