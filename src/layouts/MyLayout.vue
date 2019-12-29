@@ -15,6 +15,14 @@
     <q-drawer overlay behavior="mobile" v-model="left" side="left" bordered>
      <shopping-list></shopping-list>
     </q-drawer>
+    <q-drawer
+        side="right"
+        v-model="right"
+        overlay behavior="mobile" :width="300">
+        <q-scroll-area class="fit">
+          <transactions/>
+        </q-scroll-area>
+      </q-drawer>
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -40,7 +48,8 @@ export default {
   data() {
     return {
       left: false,
-      footer: false
+      footer: false,
+      right: false
     }
   },
   computed: {
