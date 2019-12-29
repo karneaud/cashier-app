@@ -27,7 +27,7 @@ export default function (/* { store, ssrContext } */) {
     to.matched.some( route =>{
       if(route.meta.requiresAuth){
         isAuth().then((r) => {
-          if(!r)
+          if(!r) next({ path: '/login' })
         }).catch(() => {
           next({ path: '/login' })
         })
