@@ -20,3 +20,7 @@ export function totalAmount ( state ) {
   })
   return total
 }
+
+export function getItems( state) {
+  return state.items
+}
