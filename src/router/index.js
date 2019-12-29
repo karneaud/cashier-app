@@ -23,12 +23,14 @@ export default function (/* { store, ssrContext } */) {
     base: process.env.VUE_ROUTER_BASE
   })
 
-  Router.beforeEach((to,from, next) => {
+  Router.beforeEach(async (to,from, next) => {
     to.matched.some( route =>{
       if(route.meta.requiresAuth){
-        if(!isAuth()){
+        isAuth().then((r) => {
+          if(!r)
+        }).catch(() => {
           next({ path: '/login' })
-        }
+        })
       }
 
       next()
