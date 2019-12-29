@@ -64,7 +64,7 @@ export default {
             return 0
         }))})
       .then(
-        (resp) => {console.log(resp), this.products = resp} )
+        (resp) => this.products = resp )
         .catch(err => console.log(err))
     },
     close() {
