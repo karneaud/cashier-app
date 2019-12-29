@@ -22,7 +22,7 @@
   </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters, mapActions } from 'vuex'
 
 export default {
   data () {
@@ -36,12 +36,16 @@ export default {
   computed: {
     balance() {
       return this.paid > 0? (this.paid - this.totalAmount ) : 0
-    }, ...mapGetters('items', ['totalAmount'])
+    }, ...mapGetters('items', ['totalAmount','getItems'])
   },
   methods: {
     resetPaid() {
+      let items = Array.from(this.getItems, (x) => ({ id: x.referenceid, qty: x.qty, total: ((parseFloat(x.cost) + x.multiplier) * x.qty)  }) )
+      let transaction = { items, totalAmount: this.totalAmount, paid: this.paid }
+      this.addTransaction(transaction)
       this.paid = 0
-    }
+    },
+    ...mapActions('transactions', ['addTransaction'])
   }
 }
 </script>
