@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import items from './basket'
 import user from './user'
+import VuexLocal from './persist'
 
 Vue.use(Vuex)
 
@@ -19,7 +20,8 @@ export default function (/* { ssrContext } */) {
     },
     // enable strict mode (adds overhead!)
     // for dev mode only
-    strict: false 
+    strict: false,
+    plugins: [VuexLocal.plugin]
   })
 
   return Store
