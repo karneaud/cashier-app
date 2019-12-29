@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 
 import items from './basket'
 import user from './user'
+import transactions from './transacts'
 import VuexLocal from './persist'
 
 Vue.use(Vuex)
@@ -16,7 +17,8 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       items,
-      user
+      user,
+      transactions
     },
     // enable strict mode (adds overhead!)
     // for dev mode only
