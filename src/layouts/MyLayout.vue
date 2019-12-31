@@ -6,10 +6,11 @@
          	Cashier Application
           <span id="version" class="subtitle2">v{{ version }}</span>
         </q-toolbar-title>
-        <transition appear enter-active-class="animated zoomIn"
+        <transition-group appear enter-active-class="animated zoomIn"
         leave-active-class="animated zoomOut">
-          <q-btn flat round dense id="shopping-action-button"  icon="shopping_basket" @click="left = !left" v-show="total > 0" />
-        </transition>
+          <q-btn flat key="button-1" round dense id="shopping-action-button"  icon="shopping_basket" @click="left = !left" v-show="total > 0" />
+            <q-btn flat key="button-2" round dense id="tx-action-button"  icon="receipt" @click="right = !right" v-show="totalAmount > 0 && total == 0" />
+        </transition-group>
       </q-toolbar>
     </q-header>
     <q-drawer overlay behavior="mobile" v-model="left" side="left" bordered>
@@ -53,7 +54,8 @@ export default {
     }
   },
   computed: {
-    ...mapGetters('items', ['total'])
+    ...mapGetters('items', ['total']),
+    ...mapGetters('transactions',['totalAmount'])
   },
   watch: {
     'total': function(n, o) {
