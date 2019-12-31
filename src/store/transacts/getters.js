@@ -1,3 +1,6 @@
 export function totalAmount ( state ) {
-  return state.transactions.length > 0? state.transactions.reduce((t, c, i, a) => t + c.totalAmount ) : 0
+  let total = state.transactions.sumWithFunc((item) => {
+    return item.total
+  })
+  return total
 }
