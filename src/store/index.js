@@ -5,6 +5,7 @@ import items from './basket'
 import user from './user'
 import transactions from './transacts'
 import VuexLocal from './persist'
+import VuexCookie from './cookie'
 
 Vue.use(Vuex)
 
@@ -23,7 +24,7 @@ export default function (/* { ssrContext } */) {
     // enable strict mode (adds overhead!)
     // for dev mode only
     strict: false,
-    plugins: [VuexLocal.plugin]
+    plugins: [VuexLocal.plugin, VuexCookie.plugin]
   })
 
   return Store
