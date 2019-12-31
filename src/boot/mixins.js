@@ -1,3 +1,11 @@
+Array.prototype.sumWithFunc = function (func) {
+        var total = 0
+        for ( var i = 0, _len = this.length; i < _len; i++ ) {
+            total += func.call(this, this[i])
+        }
+        
+        return total
+}
 
 export default async ({ Vue }) => {
   Vue.mixin({
