@@ -6,7 +6,7 @@
         <p><small>{{ date }}</small></p>
       </header>
         <q-separator spaced inset />
-        <q-list v-show="totalAmount > 0" id="transactions" separator>
+        <q-list v-show="totalAmount > 0" id="transactions" separator class="q-mb-lg q-pb-lg">
           <q-item v-ripple v-for="(tx, index) in transactionItems" :key="('tx') + index" class="q-pr-none q-mb-sm">
             <q-item-section>
               <q-item-label>Total: ${{ tx.total | formatNumber }}</q-item-label>
@@ -27,7 +27,7 @@
         </q-list>
         <h6 class="q-my-sm text-center" v-show="transactionItems.length == 0">No Transactions!</h6>
       </div>
-      <p class="fixed-bottom q-mb-none q-pa-sm text-center bg-blue-grey-1">Total:&nbsp;<small>${{ totalAmount | formatNumber }}</small></p>
+      <p class="fixed-bottom q-mb-none q-pa-md text-center bg-blue-grey-1">Total:&nbsp;<small>${{ totalAmount | formatNumber }}</small></p>
     </div>
 </template>
 <script>
