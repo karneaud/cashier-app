@@ -40,6 +40,8 @@ export default {
   },
   methods: {
     resetPaid() {
+      if(this.paid < 1) return false
+
       let items = Array.from(this.getItems, (x) => ({ id: x.referenceid, qty: x.qty, total: ((parseFloat(x.cost) + x.multiplier) * x.qty)  }) )
       let transaction = { items, total: this.totalAmount, paid: this.paid }
       this.addTransaction(transaction)
