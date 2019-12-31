@@ -27,7 +27,10 @@
         </q-list>
         <h6 class="q-my-sm text-center" v-show="transactionItems.length == 0">No Transactions!</h6>
       </div>
-      <p class="fixed-bottom q-mb-none q-pa-md text-center bg-blue-grey-1">Total:&nbsp;<small>${{ totalAmount | formatNumber }}</small></p>
+      <div class="fixed-bottom q-mb-none q-pa-md text-center bg-blue-grey-1">
+        <span class="float-left">Total:&nbsp;<small>${{ totalAmount | formatNumber }}</small></span>
+        <q-btn flat round dense id="clear-action-button" class="float-right"  icon="delete" @click="clearTransactions" />
+      </div>
     </div>
 </template>
 <script>
