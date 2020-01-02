@@ -1,9 +1,9 @@
 <template lang="html">
   <div id="shopping-basket" class="bg-white">
       <div class="q-mb-lg">
-        <header class="q-my-sm q-px-sm">
-        <h6 class="text-center q-ma-none">Transactions for:</h6>
-        <p><small>{{ date }}</small></p>
+        <header class="q-my-sm q-px-sm text-center">
+        <h6 class="q-ma-none">Transactions for:</h6>
+        <p><small>{{ Now.format("dddd, MMMM Do YYYY") }}</small></p>
       </header>
         <q-separator spaced inset />
         <q-list v-show="totalAmount > 0" id="transactions" separator class="q-mb-lg q-pb-lg">
@@ -36,13 +36,9 @@
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
 
+
 export default {
   name: "Transactions",
-  data() {
-    return {
-      date: (new Date).toString()
-    }
-  },
   computed: {
     ...mapState('transactions', {
       transactionItems: (state) => state.transactions
