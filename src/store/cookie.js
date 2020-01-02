@@ -7,7 +7,7 @@ const VuexCookie = new VuexPersistence({
     if(state.transactions.transactions.length == 0) {
       Cookies.remove(key)
     } else Cookies.set(key, state, {
-      expires: 1
+      expires: 1 
     })
   },
   modules: ['transactions']
