@@ -23,7 +23,8 @@
     "style-loader": "^0.23.1",
     "vue-axios": "^2.1.4",
     "vuex-persist": "^2.2.0",
-    "js-cookie":"*"
+    "js-cookie":"*",
+    "moment":"*"
   },
   "devDependencies": {
     "@quasar/app": "*",
