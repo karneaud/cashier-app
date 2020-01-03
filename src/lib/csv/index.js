@@ -1,18 +1,17 @@
 function convertToCSV(objArray) {
-    var array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray;
-    var str = '';
-
+    let array = typeof objArray != 'object' ? JSON.parse(objArray) : objArray, str = '';
     for (var i = 0; i < array.length; i++) {
-        var line = '';
-        for (var index in array[i]) {
+        let line = '', a = array[i]
+        for (var index in a) {
+            let b = a[index]
+            if (typeof a[index] == 'function') continue
             if (line != '') line += ','
 
-            line += array[i][index];
+            line +=  a[index];
         }
 
         str += line + '\r\n';
     }
-
     return str;
 }
 
@@ -22,13 +21,7 @@ export default function exportCSVFile(headers, items, fileTitle) {
     }
 
     // Convert Object to JSON
-    var jsonObject = JSON.stringify(items);
-
-    var csv = convertToCSV(jsonObject);
-
-    var exportedFilenmae = fileTitle + '.csv' || 'export.csv';
-
-    var blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    let jsonObject = JSON.stringify(items), csv = convertToCSV(jsonObject), exportedFilenmae = fileTitle + '.csv' || 'export.csv', blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
     if (navigator.msSaveBlob) { // IE 10+
         navigator.msSaveBlob(blob, exportedFilenmae);
     } else {
