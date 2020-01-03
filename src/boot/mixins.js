@@ -9,6 +9,15 @@ Array.prototype.sumWithFunc = function (func) {
         return total
 }
 
+Array.prototype.flatten = function() {
+  let a = new Array
+  for ( var i = 0, _len = this.length; i < _len; i++ ) {
+      a = a.concat((Array.isArray(this[i])? this[i].flatten() : [this[i]] ))
+  }
+
+  return a
+}
+
 export default async ({ Vue }) => {
   Vue.mixin({
     data() {
