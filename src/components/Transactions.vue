@@ -1,10 +1,13 @@
 <template lang="html">
-  <div id="shopping-basket" class="bg-white">
+  <div id="tx-list" class="bg-white">
       <div class="q-mb-lg">
-        <header class="q-my-sm q-px-sm text-center">
-        <h6 class="q-ma-none">Transactions for:</h6>
-        <p><small>{{ Now.format("dddd, MMMM Do YYYY") }}</small></p>
-      </header>
+        <q-toolbar>
+          <q-toolbar-title class="q-my-md q-px-lg">
+            <h6 class="q-ma-none q-pa-none">Transactions</h6>
+            <p class="text-caption q-ma-none">{{ Now.format("dddd, MMMM Do YYYY") }}</p>
+          </q-toolbar-title>
+          <q-btn flat @click="clearTransactions" round dense icon="delete" />
+        </q-toolbar>
         <q-separator spaced inset />
         <q-list v-show="totalAmount > 0" id="transactions" separator class="q-mb-lg q-pb-lg">
           <q-item v-ripple v-for="(tx, index) in transactionItems" :key="('tx') + index" class="q-pr-none q-mb-sm">
@@ -27,15 +30,16 @@
         </q-list>
         <h6 class="q-my-sm text-center" v-show="transactionItems.length == 0">No Transactions!</h6>
       </div>
-      <div class="fixed-bottom q-mb-none q-pa-md text-center bg-blue-grey-1">
-        <span class="float-left">Total:&nbsp;<small>${{ totalAmount | formatNumber }}</small></span>
-        <q-btn flat round dense id="clear-action-button" class="float-right"  icon="delete" @click="clearTransactions" />
-      </div>
+      <q-toolbar class="fixed-bottom bg-grey-1">
+        <q-toolbar-title>
+          Total:&nbsp;${{ totalAmount | formatNumber }}
+        </q-toolbar-title>
+        <q-btn flat @click="downloadTransactions" round dense icon="cloud_download" />
+      </q-toolbar>
     </div>
 </template>
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
-
 
 export default {
   name: "Transactions",
@@ -48,7 +52,10 @@ export default {
   methods: {
     ...mapActions('transactions', [
       'clearTransactions'
-    ])
+    ]),
+    downloadTransactions() {
+
+    }
   }
 }
 </script>
