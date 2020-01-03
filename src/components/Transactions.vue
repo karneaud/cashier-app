@@ -40,6 +40,7 @@
 </template>
 <script>
 import { mapActions, mapState, mapGetters } from 'vuex'
+import exportCSVFile from '../lib/csv'
 
 export default {
   name: "Transactions",
@@ -54,7 +55,10 @@ export default {
       'clearTransactions'
     ]),
     downloadTransactions() {
-
+      let items = Array.from(
+          this.transactionItems,
+          (o) => o.items).flatten()
+      exportCSVFile(['id','qty','total'], items,'reconcile')
     }
   }
 }
