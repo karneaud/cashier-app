@@ -24,7 +24,11 @@
         </q-list>
         <h6 class="q-my-sm text-center" v-show="items.length == 0">No Items!</h6>
       </div>
-      <p class="fixed-bottom q-mb-none q-pa-sm text-center bg-blue-grey-1">Total:&nbsp;<small>${{ totalAmount | formatNumber }}</small></p>
+      <q-toolbar class="fixed-bottom bg-grey-1">
+        <q-toolbar-title class="text-center">
+          Total:&nbsp;${{ totalAmount | formatNumber }}
+        </q-toolbar-title>
+      </q-toolbar>
     </div>
 </template>
 <script>
