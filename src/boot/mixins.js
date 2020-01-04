@@ -1,12 +1,12 @@
 import moment from 'moment'
 
 Array.prototype.sumWithFunc = function (func) {
-        var total = 0
-        for ( var i = 0, _len = this.length; i < _len; i++ ) {
-            total += func.call(this, this[i])
-        }
+    var total = 0
+    for ( var i = 0, _len = this.length; i < _len; i++ ) {
+        total += func.call(this, this[i])
+    }
 
-        return total
+    return total
 }
 
 Array.prototype.flatten = function() {
@@ -35,12 +35,12 @@ export default async ({ Vue }) => {
           number
           : ((numArr[0]
             .split('')
-              .reverse())
-              .reduceRight(
-                (a, b, i, arr) => {
-                  let n = i + 1
-                  return a.concat((n > 2 && n % 3 == 0? "," : ""), b)
-                }))
+            .reverse())
+          .reduceRight(
+            (a, b, i, arr) => {
+              let n = i + 1
+              return a.concat((n > 2 && n % 3 == 0? "," : ""), b)
+            }))
           .concat(".", numArr[1])
       }
     }
