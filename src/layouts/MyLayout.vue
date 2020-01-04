@@ -27,7 +27,7 @@
       </q-drawer>
       <q-drawer side="right" v-model="settings">
         <section>
-          <header><h6>Settings</h6></header>
+          <header class="text-center"><h6 class="q-my-sm">Settings</h6></header>
           <q-separator/>
           <article class="container">
             <k-form @saved="settings = false" buttonText="Save"/>
