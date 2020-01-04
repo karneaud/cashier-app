@@ -20,8 +20,8 @@
     name: 'KForm',
     data() {
       return {
-        username: null,
-        sheet: null,
+        username: this.getUserEmail(),
+        sheet: this.getSheetId(),
         loading: false
       }
     },
@@ -32,9 +32,9 @@
           this.username = `${ (/@/g).test(email)? email.substr(0, email.indexOf('@')) : email }`
         },
         get() {
-          let uname = (this.username == null? this.getUserEmail || '' : this.username)
+          let uname = (this.username == null? this.getUserEmail() || '' : this.username)
 
-          return uname.substr(0, uname.indexOf('@'))
+          return (/@/g).test(uname)? uname.substr(0, uname.indexOf('@')) : uname
         }
       },
       url: {
@@ -42,7 +42,7 @@
           this.sheet = r.test(s)? s.match(r)[1] : s
         },
         get() {
-          return this.sheet? this.sheet : this.getSheetId
+          return this.sheet? this.sheet : this.getSheetId()
         }
       },
       loaded () {
@@ -50,8 +50,7 @@
       },
       disabled() {
         return (this.username == null && this.sheet == null) || (this.sheet == null)
-      },
-      ...mapGetters('user', ['getUserEmail','getSheetId'])
+      }
     },
     methods: {
       setUserValues() {
@@ -64,6 +63,7 @@
           }).finally(() => this.loading = false)
         }
       },
+      ...mapGetters('user', ['getUserEmail','getSheetId']),
       ...mapActions('user', ['setUserEmail', 'setSheetId'])
     }
   }
