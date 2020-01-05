@@ -10,7 +10,7 @@
       <div class="flex col">
         <q-scroll-area class="flex fit" style="min-height:100%; max-height:100%;">
           <q-list id="menu-item-list" bordered separator>
-            <q-item clickable @click.native="selectItemAt(index)" v-ripple v-for="(item, index) in filteredItems" :key="item.referenceid">
+            <q-item clickable @click.native="selectItemAt(index)" v-ripple v-for="(item, index) in filteredItems" :key="item.productid">
               <q-item-section>
               <q-item-label overline>{{ item.productitem }}</q-item-label>
               <q-item-label class="text-primary">${{ item.cost | formatNumber }}</q-item-label>
