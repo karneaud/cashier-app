@@ -71,7 +71,7 @@ module.exports = function (ctx) {
       pwa: false
     },
     pwa: {
-      workboxPluginMode: 'InjectManifest',
+      //workboxPluginMode: 'InjectManifest',
       workboxOptions: {
         globPatterns: ['**/*.{js,css,html,png,woff,jpg}'],
         runtimeCaching: [
