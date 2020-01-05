@@ -8,7 +8,7 @@
       </header>
         <q-separator spaced inset />
         <q-list v-show="total > 0" id="shoppin-list" separator>
-          <q-item v-ripple v-for="(item, index) in items" :key="(item.productid) + index" class="q-pr-none q-mb-sm">
+          <q-item v-ripple v-for="(item, index) in items" :key="((item.productid) + index)+'shop'" class="q-pr-none q-mb-sm">
             <q-item-section avatar>
                 <q-icon @click="removeItem(index)" name="close"/>
               </q-item-section>
