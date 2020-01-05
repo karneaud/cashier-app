@@ -8,7 +8,7 @@
   "private": true,
   "scripts": {
     "test": "quasar test --unit jest --dev='-m spa'",
-    "preinstall": "yarn global add @vue/cli @vue/cli-init @quasar/cli"
+    "preinstall": "yarn global add @vue/cli @vue/cli-init @quasar/cli",
     "dev": "quasar dev",
     "build": "quasar build",
     "build:pwa": "quasar build -m pwa",
