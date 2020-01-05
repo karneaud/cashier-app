@@ -6,7 +6,7 @@
       <q-btn ref="loginBtn" :loading="loaded" :disable="disabled" unelevated color="light-green-7" size="lg" class="full-width" @click="setUserValues" :label="buttonText" />
     </div>
     <div class="row">
-      <a href=""><small>See how you create your spreadsheet here</small></a>
+      <router-link :to="{ path: '/help' }"><small>See how you create your spreadsheet here</small></router-link>
     </div>
   </q-form>
 </template>
