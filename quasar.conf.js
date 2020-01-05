@@ -2,25 +2,17 @@
 
 module.exports = function (ctx) {
   return {
-    // app boot file (/src/boot)
-    // --> boot files are part of "main.js"
     boot: [
       'axios',
       'mixins',
       'components'
     ],
-
     css: [
       'app.styl'
     ],
-
     extras: [
       'roboto-font',
       'material-icons' // optional, you are not bound to it
-      // 'ionicons-v4',
-      // 'mdi-v3',
-      // 'fontawesome-v5',
-      // 'eva-icons'
     ],
     framework: {
       // all: true, // --- includes everything; for dev only!
@@ -51,136 +43,78 @@ module.exports = function (ctx) {
         'QAjaxBar',
         'QForm'
       ],
-
       directives: [
         'Ripple'
       ],
-
       // Quasar plugins
       plugins: [
         'Notify'
       ]
-
-      // iconSet: 'ionicons-v4'
-      // lang: 'de' // Quasar language
     },
     supportIE: false,
-
     build: {
       scopeHoisting: true,
-      // vueRouterMode: 'history',
-      // vueCompiler: true,
-      // gzip: true,
-      // analyze: true,
-      // extractCSS: false,
       extendWebpack (cfg) {
       	return {
         	htmlVariables: { title: "Cashier Application" }
         }
       }
     },
-
     devServer: {
       https: true,
-      //port: 8080,
       public: '0.0.0.0',
       open: false // opens browser window automatically
     },
-
     // animations: 'all' --- includes all animations
     animations: ['slideInUp', 'slideOutDown', 'zoomIn', 'zoomOut'],
-
     ssr: {
       pwa: false
     },
-
     pwa: {
       workboxPluginMode: 'InjectManifest',
       workboxOptions: {
-<<<<<<< HEAD
-        include: [/\.html$/,/\.js$/,/\.png$/,/\.woff$/,/\.json$/],
-        runtimeCaching: [{
-          // Match any same-origin request that contains 'api'.
-          urlPattern: /js/,
-          // Apply a network-first strategy.
-          handler: 'NetworkFirst',
-          options: {
-            // Fall back to the cache after 10 seconds.
-            networkTimeoutSeconds: 10,
-            // Use a custom cache name for this route.
-            cacheName: 'cashier-app-js',
-            // Configure custom cache expiration.
-            expiration: {
-              maxEntries: 5,
-              maxAgeSeconds: 60,
-            },
-            // Configure background sync.
-            backgroundSync: {
-              name: 'cashier-queue-js',
-              options: {
-                maxRetentionTime: 60 * 60,
-              },
-            },
-            // Configure which responses are considered cacheable.
-            cacheableResponse: {
-              statuses: [0, 200]
-            }
-          },
-        },{
-          // Match any same-origin request that contains 'api'.
-          urlPattern: /css/,
-          // Apply a network-first strategy.
-          handler: 'NetworkFirst',
-          options: {
-            // Fall back to the cache after 10 seconds.
-            networkTimeoutSeconds: 10,
-            // Use a custom cache name for this route.
-            cacheName: 'cashier-app-css',
-            // Configure custom cache expiration.
-            expiration: {
-              maxEntries: 5,
-              maxAgeSeconds: 60,
-            },
-            // Configure background sync.
-            backgroundSync: {
-              name: 'cashier-queue-css',
-              options: {
-                maxRetentionTime: 60 * 60,
-              },
-            },
-            // Configure which responses are considered cacheable.
-            cacheableResponse: {
-              statuses: [0, 200]
-            }
-          },
-          },
-          {
-          // To match cross-origin requests, use a RegExp that matches
-          // the start of the origin:
-          urlPattern: new RegExp('^https://script\.googleusercontent\.com/'),
-          handler: 'StaleWhileRevalidate',
-          options: {
-
-            cacheableResponse: {
-              statuses: [0, 200]
-            }
-          }
-        }]
-=======
-        skipWaiting: true,
-        clientsClaim: true,
-        globPatterns: ['**/*.{js,css,html,png,woff}'],
-        include: [/\.html$/, /\.js$/,/\.png$/,/\.woff$/],
+        globPatterns: ['**/*.{js,css,html,png,woff,jpg}'],
         runtimeCaching: [
           {
-            urlPattern: new RegExp('^https://spreadsheets\.google\.com/'),
-            handler: 'Cache-first',
+            // Match any same-origin request that contains 'api'.
+            urlPattern: /\.(?:png|jpg|jpeg|svg|css|js|html|woff)$/,
+            // Apply a network-first strategy.
+            handler: 'NetworkFirst',
             options: {
-              maxAgeSeconds: (24 * 60 * 60)
+              // Fall back to the cache after 10 seconds.
+                networkTimeoutSeconds: 5,
+                // Use a custom cache name for this route.
+                cacheName: 'cashier-app',
+                // Configure custom cache expiration.
+                expiration: {
+                  maxEntries: 5,
+                  maxAgeSeconds: 60,
+                },
+                // Configure background sync.
+                backgroundSync: {
+                  name: 'cashier-queue-js',
+                  options: {
+                    maxRetentionTime: 60 * 60,
+                  },
+                },
+                // Configure which responses are considered cacheable.
+                cacheableResponse: {
+                  statuses: [0, 200]
+                }
+              }
+          },
+          {
+            // To match cross-origin requests, use a RegExp that matches
+            // the start of the origin:
+            urlPattern: new RegExp('^https://googlesheets\.google\.com/'),
+            handler: 'StaleWhileRevalidate',
+            options: {
+              cacheableResponse: {
+                statuses: [0, 200]
+              }
             }
           }
-        ]
->>>>>>> develop
+        ],
       },
       manifest: {
         name: 'Cashier App',
