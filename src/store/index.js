@@ -2,6 +2,10 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import items from './basket'
+import user from './user'
+import transactions from './transacts'
+import VuexLocal from './persist'
+import VuexCookie from './cookie'
 
 Vue.use(Vuex)
 
@@ -13,12 +17,14 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      items
+      items,
+      user,
+      transactions
     },
-
     // enable strict mode (adds overhead!)
     // for dev mode only
-    strict: process.env.DEV
+    strict: false,
+    plugins: [VuexLocal.plugin, VuexCookie.plugin]
   })
 
   return Store

@@ -70,9 +70,9 @@ export default {
       this.removeItem()
     },
     reset() {
+      this.$root.$emit('reset')
       this.clearData()
       this.clearItems()
-      this.$root.$emit('reset')
     },
     clearData() {
       this.operator = "*"

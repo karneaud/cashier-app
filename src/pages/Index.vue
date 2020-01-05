@@ -6,40 +6,15 @@
               <menuitem-list></menuitem-list>
             </div>
             <div class="col-5">
-              <div class="fit column q-pa-sm">
-                <div class="col-8">
-                  <numpad></numpad>
-                </div>
-                <div class="col-2">
-                  <input-display></input-display>
-                </div>
-              </div>
+              <numpad></numpad>
             </div>
           </div>
         </div>
-       <shopping-list :show-list="showItems"></shopping-list>
   </q-page>
 </template>
 <script>
-import { mapGetters } from 'vuex'
 
 export default {
-  name: 'PageIndex',
-  data() {
-    return {
-      showItems: false
-    }
-  },
-  created() {
-    this.$root.$on('showItems', () => this.showItems = !this.showItems )
-  },
-  computed: {
-    ...mapGetters('items', ['total'])
-  },
-  watch: {
-    'total' : function(n,o) {
-      if((n == 0) && (this.showItems == true)) this.showItems = false
-    }
-  }
+  name: 'PageIndex'
 }
 </script>

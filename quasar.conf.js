@@ -30,23 +30,26 @@ module.exports = function (ctx) {
         'QHeader',
         'QPageContainer',
         'QPage',
+        'QAvatar',
         'QPageSticky',
         'QToolbar',
         'QToolbarTitle',
         'QBtn',
         'QIcon',
+        'QDrawer',
         'QList',
         'QItem',
         'QItemSection',
         'QItemLabel',
-        'QAvatar',
         'QInput',
         'QBadge',
         'QScrollArea',
         'QFab',
+        'QFooter',
         'QFabAction',
         'QSeparator',
-        'QAjaxBar'
+        'QAjaxBar',
+        'QForm'
       ],
 
       directives: [
@@ -79,8 +82,8 @@ module.exports = function (ctx) {
 
     devServer: {
       https: true,
-      // port: 8080,
-      // public: '0.0.0.0',
+      //port: 8080,
+      public: '0.0.0.0',
       open: false // opens browser window automatically
     },
 

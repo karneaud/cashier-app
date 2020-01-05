@@ -18,8 +18,19 @@ import '@quasar/extras/material-icons/material-icons.css'
 
 
 
+import '@quasar/extras/animate/slideInUp.css'
 
-import 'quasar-styl'
+import '@quasar/extras/animate/slideOutDown.css'
+
+import '@quasar/extras/animate/zoomIn.css'
+
+import '@quasar/extras/animate/zoomOut.css'
+
+
+// We load Quasar stylesheet file
+import 'quasar/dist/quasar.styl'
+
+
 
 
 import 'src/css/app.styl'
@@ -31,8 +42,11 @@ import createApp from './app.js'
 
 
 
-import b_Bootaxios from 'boot/axios'
-import v_Mixins from 'boot/mixins'
+import qboot_Bootaxios from 'boot/axios'
+
+import qboot_Bootmixins from 'boot/mixins'
+
+import qboot_Bootcomponents from 'boot/components'
 
 
 
@@ -49,21 +63,34 @@ console.info('[Quasar] Running SPA.')
 
 
 
-const { app, store, router } = createApp()
-
 
 
 async function start () {
+  const { app, store, router } = await createApp()
+  
+  let routeUnchanged = true
+  const redirect = url => {
+    routeUnchanged = false
+    window.location.href = url
+  }
 
-  const bootFiles = [b_Bootaxios, v_Mixins]
-  for (let i = 0; i < bootFiles.length; i++) {
+  const urlPath = window.location.href.replace(window.location.origin, '')
+  const bootFiles = [qboot_Bootaxios,qboot_Bootmixins,qboot_Bootcomponents]
+
+  for (let i = 0; routeUnchanged === true && i < bootFiles.length; i++) {
+    if (typeof bootFiles[i] !== 'function') {
+      continue
+    }
+
     try {
       await bootFiles[i]({
         app,
         router,
         store,
         Vue,
-        ssrContext: null
+        ssrContext: null,
+        redirect,
+        urlPath
       })
     }
     catch (err) {
@@ -77,19 +104,11 @@ async function start () {
     }
   }
 
+  if (routeUnchanged === false) {
+    return
+  }
 
-
-
-
-
-
-
-      new Vue(app)
-
-
-
-
-
+  new Vue(app)
 }
 
 start()
