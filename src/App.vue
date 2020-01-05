@@ -6,7 +6,7 @@
         <header class="text-center">
           <h3 class="text-h1">Welcome</h3>
         </header>
-        <article class="container q-mx-auto" style="width: 75%">
+        <article class="container q-mx-auto">
           <div class="row justify-center">
             <div class="col-6 col-md-auto text-center">
               <div class="container">
@@ -45,6 +45,13 @@
                           </div>
                         </div>
                       </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row q-my-md">
+                  <div class="col-12">
+                    <div class="container">
+                      <p class="text-body1">Once this is done. Close this browser and open the app using the icon on the Home Screen.</p>
                     </div>
                   </div>
                 </div>
