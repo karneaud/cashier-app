@@ -1,4 +1,10 @@
 export function add (state , item ) {
+  let index = state.items.length > 0? state.items.findIndex((i) => item.productid === i.productid) : -1
+  if(index != -1) {
+    item = state.items.splice(index, 1)[0]
+    item.qty += 1
+  }
+  
   state.items.push(item)
 }
 
