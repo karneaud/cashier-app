@@ -95,16 +95,21 @@ module.exports = function (ctx) {
     },
 
     pwa: {
-      //workboxPluginMode: 'InjectManifest',
+      workboxPluginMode: 'InjectManifest',
       workboxOptions: {
         skipWaiting: true,
         clientsClaim: true,
-        include: [/\.html$/, /\.js$/,/\.png$/,/\.woff$/]
-        // runtimeCaching: [
-        //   {
-        //     urlPattern:
-        //   }
-        // ]
+        globPatterns: ['**/*.{js,css,html,png,woff}'],
+        include: [/\.html$/, /\.js$/,/\.png$/,/\.woff$/],
+        runtimeCaching: [
+          {
+            urlPattern: new RegExp('^https://spreadsheets\.google\.com/'),
+            handler: 'Cache-first',
+            options: {
+              maxAgeSeconds: (24 * 60 * 60)
+            }
+          }
+        ]
       },
       manifest: {
         name: 'Cashier App',
