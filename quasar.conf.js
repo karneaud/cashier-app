@@ -95,8 +95,9 @@ module.exports = function (ctx) {
     },
 
     pwa: {
-      //workboxPluginMode: 'InjectManifest',
+      workboxPluginMode: 'InjectManifest',
       workboxOptions: {
+<<<<<<< HEAD
         include: [/\.html$/,/\.js$/,/\.png$/,/\.woff$/,/\.json$/],
         runtimeCaching: [{
           // Match any same-origin request that contains 'api'.
@@ -165,6 +166,21 @@ module.exports = function (ctx) {
             }
           }
         }]
+=======
+        skipWaiting: true,
+        clientsClaim: true,
+        globPatterns: ['**/*.{js,css,html,png,woff}'],
+        include: [/\.html$/, /\.js$/,/\.png$/,/\.woff$/],
+        runtimeCaching: [
+          {
+            urlPattern: new RegExp('^https://spreadsheets\.google\.com/'),
+            handler: 'Cache-first',
+            options: {
+              maxAgeSeconds: (24 * 60 * 60)
+            }
+          }
+        ]
+>>>>>>> develop
       },
       manifest: {
         name: 'Cashier App',
