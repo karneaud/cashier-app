@@ -11,10 +11,11 @@
           <q-btn flat key="button-1" round dense id="shopping-action-button"  icon="shopping_basket" @click="left = !left" v-show="total > 0" />
           <q-btn flat key="button-2" round dense id="tx-action-button"  icon="receipt" @click="right = !right" v-show="totalAmount > 0 && total == 0" />
         </transition-group>
+        <q-btn flat round dence id="help" icon="help" @click="(() => this.$router.push({ path: '/help' }))"/>
         <q-btn flat round dense id="stt-action-button" icon="settings_applications" @click="settings = !settings" />
       </q-toolbar>
     </q-header>
-    <q-drawer overlay behavior="mobile" v-model="left" side="left" bordered>
+    <q-drawer overlay behavior="mobile" v-model="left" :width="300" side="left" bordered>
      <shopping-list></shopping-list>
     </q-drawer>
     <q-drawer
@@ -25,7 +26,7 @@
           <transactions/>
         </q-scroll-area>
       </q-drawer>
-      <q-drawer side="right" v-model="settings">
+      <q-drawer side="right" overlay behavior="mobile" :width="450" v-model="settings">
         <section>
           <header class="text-center"><h6 class="q-my-sm">Settings</h6></header>
           <q-separator/>
