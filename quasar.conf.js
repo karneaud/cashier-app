@@ -106,7 +106,7 @@ module.exports = function (ctx) {
           {
             // To match cross-origin requests, use a RegExp that matches
             // the start of the origin:
-            urlPattern: new RegExp('^https://googlesheets\.google\.com/'),
+            urlPattern: new RegExp('^https:\/\/spreadsheets\.google\.com\/'),
             handler: 'NetworkFirst',
             options: {
               cacheableResponse: {
