@@ -11,7 +11,7 @@
           <q-btn flat key="button-1" round dense id="shopping-action-button"  icon="shopping_basket" @click="left = !left" v-show="total > 0" />
           <q-btn flat key="button-2" round dense id="tx-action-button"  icon="receipt" @click="right = !right" v-show="totalAmount > 0 && total == 0" />
         </transition-group>
-        <q-btn flat round dence id="help" icon="help" @click="(() => this.$router.push({ path: '/help' }))"/>
+        <q-btn flat round dence id="help" icon="help" @click="helpFile"/>
         <q-btn flat round dense id="stt-action-button" icon="settings_applications" @click="settings = !settings" />
       </q-toolbar>
     </q-header>
@@ -74,6 +74,11 @@ export default {
         if((n <= 0) && this.left) this.left = false
 
         this.footer = n > 0
+    }
+  },
+  methods: {
+    helpFile() {
+      window.open('https://docs.google.com/document/d/14-cii1Ost4WZj5PK_twahIBbS64iQQmFd77DDc5yQNs/edit?usp=sharing','_blank')
     }
   }
 }
