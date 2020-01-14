@@ -47,7 +47,7 @@
     },
     created() {
       let agent = navigator.userAgent || navigator.vendor || window.opera
-      this.standalone = true//isRunningStandalone()
+      this.standalone = isRunningStandalone()
       this.device = (/android/i).test(agent) ?  'android' : ((/ipad/).test(agent)? 'ios' : null )
       this.landscape = (this.standalone && (window.innerWidth > window.innerHeight) && (window.innerWidth > 600))
     }
