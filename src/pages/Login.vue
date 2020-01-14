@@ -10,7 +10,7 @@
                   <q-avatar size="128px" class="q-ma-md">
                     <img src="https://place-hold.it/300x500" />
                   </q-avatar>
-                  <small><a href="">Need Help?</a></small>
+                  <small><a href="https://docs.google.com/document/d/14-cii1Ost4WZj5PK_twahIBbS64iQQmFd77DDc5yQNs/edit?usp=sharing" target="_blank">Need Help?</a></small>
                 </div>
               </div>
               <div class="col">
