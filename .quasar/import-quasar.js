@@ -13,7 +13,7 @@
 
 import Vue from 'vue'
 
-import {Quasar,QLayout,QHeader,QPageContainer,QPage,QPageSticky,QToolbar,QToolbarTitle,QBtn,QIcon,QDrawer,QList,QItem,QItemSection,QItemLabel,QAvatar,QInput,QBadge,QScrollArea,QFab,QFabAction,QSeparator,QAjaxBar,Ripple,Notify} from 'quasar'
+import {Quasar,QLayout,QHeader,QPageContainer,QPage,QAvatar,QPageSticky,QToolbar,QToolbarTitle,QBtn,QIcon,QDrawer,QList,QItem,QItemSection,QItemLabel,QInput,QBadge,QScrollArea,QFab,QFooter,QFabAction,QSeparator,QAjaxBar,QForm,Ripple,Notify} from 'quasar'
 
 
-Vue.use(Quasar, { config: {},components: {QLayout,QHeader,QPageContainer,QPage,QPageSticky,QToolbar,QToolbarTitle,QBtn,QIcon,QDrawer,QList,QItem,QItemSection,QItemLabel,QAvatar,QInput,QBadge,QScrollArea,QFab,QFabAction,QSeparator,QAjaxBar},directives: {Ripple},plugins: {Notify} })
+Vue.use(Quasar, { config: {},components: {QLayout,QHeader,QPageContainer,QPage,QAvatar,QPageSticky,QToolbar,QToolbarTitle,QBtn,QIcon,QDrawer,QList,QItem,QItemSection,QItemLabel,QInput,QBadge,QScrollArea,QFab,QFooter,QFabAction,QSeparator,QAjaxBar,QForm},directives: {Ripple},plugins: {Notify} })

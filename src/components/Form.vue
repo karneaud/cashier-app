@@ -1,70 +1,101 @@
 <template lang="html">
   <q-form class="q-pa-md">
     <div class="row items-start">
-      <q-input filled hint="without @gmail.com" class="full-width" v-model="address" type="text" suffix="@gmail.com" label="Enter Gmail"/>
-      <q-input square hint="URL or ID" class="full-width q-my-sm" filled clearable v-model="url" type="text" label="Sheet ID#/ URL" />
-      <q-btn ref="loginBtn" :loading="loaded" :disable="disabled" unelevated color="light-green-7" size="lg" class="full-width" @click="setUserValues" :label="buttonText" />
-    </div>
-    <div class="row">
-      <a href="https://docs.google.com/document/d/14-cii1Ost4WZj5PK_twahIBbS64iQQmFd77DDc5yQNs/edit?usp=sharing" target="_blank"><small>See how you create your spreadsheet here</small></a>
+      <q-input
+        square
+        hint="URL or ID"
+        class="full-width q-my-sm"
+        filled
+        clearable
+        v-model="url"
+        type="text"
+        label="Sheet ID#/ URL"
+      />
+      <q-input
+        square
+        hint="Sheet Name"
+        class="full-width q-my-sm"
+        filled
+        clearable
+        v-model="title"
+        type="text"
+        label="Sheet Name"
+      />
+      <q-btn
+        ref="loginBtn"
+        :loading="loaded"
+        :disable="disabled"
+        unelevated
+        color="light-green-7"
+        size="lg"
+        class="full-width"
+        @click="setUserValues"
+        :label="buttonText"
+      />
     </div>
   </q-form>
 </template>
 <script>
-  import drive from 'drive-db'
-  import { mapActions, mapGetters } from 'vuex'
+import { OAuth2Client } from "google-auth-library";
+import { GoogleSpreadsheet } from "google-spreadsheet";
+import { mapActions, mapGetters } from "vuex";
+const Exp = /^https:\/\/docs\.google\.com\/spreadsheets\/d\/(.+)\//,
+  Client = new OAuth2Client({
+    clientId: process.env.GOOGLE_OAUTH_CLIENT_ID,
+    clientSecret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+    redirectUri: window.location.href
+  }),
+  Doc = new GoogleSpreadsheet(),
+  getSheet = async function(sheetId, title) {
+    Doc.updateProperties({ sheetId });
+    await Doc.useOAuth2Client(Client);
+    await Doc.loadInfo();
+    let sheet = Doc.sheetsByTitle(title);
+    return await sheet.getRows();
+  };
 
-  let r = /^https:\/\/docs\.google\.com\/spreadsheets\/d\/(.+)\//
-
-  export default {
-    name: 'KForm',
-    data() {
-      return {
-        username: this.getUserEmail(),
-        sheet: this.getSheetId(),
-        loading: false
+export default {
+  name: "KForm",
+  data() {
+    return {
+      title: "",
+      sheet: this.getSheetId(),
+      loading: false
+    };
+  },
+  props: ["buttonText"],
+  computed: {
+    url: {
+      set(s) {
+        this.sheet = Exp.test(s) ? s.match(Exp)[1] : s;
+      },
+      get() {
+        return this.sheet ? this.sheet : this.getSheetId();
       }
     },
-    props: ['buttonText'],
-    computed: {
-      address: {
-        set(email) {
-          this.username = `${ (/@/g).test(email)? email.substr(0, email.indexOf('@')) : email }`
-        },
-        get() {
-          let uname = (this.username == null? this.getUserEmail() || '' : this.username)
-
-          return (/@/g).test(uname)? uname.substr(0, uname.indexOf('@')) : uname
-        }
-      },
-      url: {
-        set(s) {
-          this.sheet = r.test(s)? s.match(r)[1] : s
-        },
-        get() {
-          return this.sheet? this.sheet : this.getSheetId()
-        }
-      },
-      loaded () {
-        return this.loading
-      },
-      disabled() {
-        return (this.username == null && this.sheet == null) || (this.sheet == null)
-      }
+    loaded() {
+      return this.loading;
     },
-    methods: {
-      setUserValues() {
-        if(this.username && this.sheet) {
-          this.setUserEmail(this.username)
-          this.setSheetId(this.sheet)
-          this.loading = true
-          drive({sheet: this.sheet, cache: 0}).catch((e) => console.log(e)).then(db => {
-            return this.$emit('saved')
-          }).finally(() => this.loading = false)
-        }
-      },
-      ...mapGetters('user', ['getUserEmail','getSheetId']),
-      ...mapActions('user', ['setUserEmail', 'setSheetId'])
+    disabled() {
+      return this.title == null && this.sheet == null;
     }
+  },
+  methods: {
+    setUserValues() {
+      if (this.title && this.sheet) {
+        this.setSheetId(this.sheet);
+        this.loading = true;
+        getSheet(this.sheet, this.title)
+          .catch(console.err)
+          .then(rows => {
+            console.log(rows);
+            return this.$emit("saved");
+          })
+          .finally(() => (this.loading = false));
+      }
+    },
+    ...mapGetters("user", ["getSheetId"]),
+    ...mapActions("user", ["setSheetId"])
   }
+};
 </script>
