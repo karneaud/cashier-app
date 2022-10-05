@@ -64,6 +64,7 @@ export default {
     };
   },
   props: ["buttonText"],
+  emits: ["saved"],
   computed: {
     url: {
       set(s) {

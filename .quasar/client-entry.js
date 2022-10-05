@@ -4,11 +4,18 @@
  *
  * You are probably looking on adding startup/initialization code.
  * Use "quasar new boot <name>" and add it there.
- * One boot file per concern. Then reference the file(s) in quasar.conf.js > boot:
+ * One boot file per concern. Then reference the file(s) in quasar.config.js > boot:
  * boot: ['file', ...] // do not add ".js" extension to it.
  *
  * Boot files are your "main.js"
  **/
+
+
+import { createApp } from 'vue'
+
+
+
+
 
 
 
@@ -28,34 +35,19 @@ import '@quasar/extras/animate/zoomOut.css'
 
 
 // We load Quasar stylesheet file
-import 'quasar/dist/quasar.styl'
+import 'quasar/dist/quasar.sass'
 
 
 
 
-import 'src/css/app.styl'
+import 'src/css/app.sass'
 
 
-import Vue from 'vue'
-import createApp from './app.js'
-
-
-
-
-import qboot_Bootaxios from 'boot/axios'
-
-import qboot_Bootmixins from 'boot/mixins'
-
-import qboot_Bootcomponents from 'boot/components'
+import createQuasarApp from './app.js'
+import quasarUserOptions from './quasar-user-options.js'
 
 
 
-
-
-
-
-Vue.config.devtools = true
-Vue.config.productionTip = false
 
 
 
@@ -65,40 +57,60 @@ console.info('[Quasar] Running SPA.')
 
 
 
-async function start () {
-  const { app, store, router } = await createApp()
+const publicPath = ``
 
+
+async function start ({
+  app,
+  router
+  , store, storeKey
+}, bootFiles) {
   
 
   
-  let routeUnchanged = true
+  let hasRedirected = false
+  const getRedirectUrl = url => {
+    try { return router.resolve(url).href }
+    catch (err) {}
+
+    return Object(url) === url
+      ? null
+      : url
+  }
   const redirect = url => {
-    routeUnchanged = false
-    window.location.href = url
+    hasRedirected = true
+
+    if (typeof url === 'string' && /^https?:\/\//.test(url)) {
+      window.location.href = url
+      return
+    }
+
+    const href = getRedirectUrl(url)
+
+    // continue if we didn't fail to resolve the url
+    if (href !== null) {
+      window.location.href = href
+      window.location.reload()
+    }
   }
 
   const urlPath = window.location.href.replace(window.location.origin, '')
-  const bootFiles = [qboot_Bootaxios,qboot_Bootmixins,qboot_Bootcomponents]
 
-  for (let i = 0; routeUnchanged === true && i < bootFiles.length; i++) {
-    if (typeof bootFiles[i] !== 'function') {
-      continue
-    }
-
+  for (let i = 0; hasRedirected === false && i < bootFiles.length; i++) {
     try {
       await bootFiles[i]({
         app,
         router,
         store,
-        Vue,
         ssrContext: null,
         redirect,
-        urlPath
+        urlPath,
+        publicPath
       })
     }
     catch (err) {
       if (err && err.url) {
-        window.location.href = err.url
+        redirect(err.url)
         return
       }
 
@@ -107,18 +119,21 @@ async function start () {
     }
   }
 
-  if (routeUnchanged === false) {
+  if (hasRedirected === true) {
     return
   }
   
 
+  app.use(router)
+  app.use(store, storeKey)
+
   
 
     
 
     
-
-    new Vue(app)
+      app.mount('#q-app')
+    
 
     
 
@@ -126,4 +141,27 @@ async function start () {
 
 }
 
-start()
+createQuasarApp(createApp, quasarUserOptions)
+
+  .then(app => {
+    return Promise.allSettled([
+      
+      import(/* webpackMode: "eager" */ 'boot/mixins'),
+      
+      import(/* webpackMode: "eager" */ 'boot/components')
+      
+    ]).then(bootFiles => {
+      const boot = bootFiles
+        .map(result => {
+          if (result.status === 'rejected') {
+            console.error('[Quasar] boot error:', result.reason)
+            return
+          }
+          return result.value.default
+        })
+        .filter(entry => typeof entry === 'function')
+
+      start(app, boot)
+    })
+  })
+

@@ -1,21 +1,19 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from "vue";
+import { createStore } from "vuex";
 
-import items from './basket'
-import user from './user'
-import transactions from './transacts'
-import VuexLocal from './persist'
-import VuexCookie from './cookie'
-
-Vue.use(Vuex)
+import items from "./basket";
+import user from "./user";
+import transactions from "./transacts";
+import VuexLocal from "./persist";
+import VuexCookie from "./cookie";
 
 /*
  * If not building with SSR mode, you can
  * directly export the Store instantiation
  */
 
-export default function (/* { ssrContext } */) {
-  const Store = new Vuex.Store({
+export default function(/* { ssrContext } */) {
+  const Store = createStore({
     modules: {
       items,
       user,
@@ -25,7 +23,7 @@ export default function (/* { ssrContext } */) {
     // for dev mode only
     strict: false,
     plugins: [VuexLocal.plugin, VuexCookie.plugin]
-  })
+  });
 
-  return Store
+  return Store;
 }
